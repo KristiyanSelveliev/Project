@@ -60,4 +60,10 @@ public class Customer extends User{
 		
 	}
 
+	@Override
+	void logout() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

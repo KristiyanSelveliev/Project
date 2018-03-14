@@ -37,6 +37,12 @@ public class Admin extends User{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	void logout() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

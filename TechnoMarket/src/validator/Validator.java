@@ -10,7 +10,7 @@ public class Validator {
 	
 	
 	
-	public boolean validUsername(String username) {
+	public static boolean validUsername(String username) {
 
 		if (username != null && !username.equals("")) {
 
@@ -21,7 +21,7 @@ public class Validator {
 		return false;
 	}
 	
-	public boolean validPassword(String password) {
+	public static boolean validPassword(String password) {
 
 		if (password != null && !password.equals("")) {
 
@@ -33,7 +33,7 @@ public class Validator {
 
 	}
 	
-	public boolean validEMail(String email) {
+	public static boolean validEMail(String email) {
 
 		if (email != null && !email.equals("")) {
 
