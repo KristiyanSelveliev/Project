@@ -2,10 +2,10 @@ package user;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-
+import java.util.Scanner;
 
 import market.Market;
+import product.Product;
 
 abstract public class User {
 	
@@ -14,11 +14,18 @@ abstract public class User {
 	private String username;
 	private String password;
 	private String email;
-	private String phone;
 	private LocalDateTime lastLogin;
 	private LocalDate registrationDate;	
 	private Market market = Market.getInstance();
 	private boolean loginStatus;
+	
+	public User(String name, String lastName, String username, String password, String email) {
+		this.setName(name);
+		this.setLastName(lastName);
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
 
 	
 	void login() {
@@ -28,9 +35,12 @@ abstract public class User {
 	void logout() {
 		this.loginStatus = false;
 	}
-	abstract void register();
-	abstract void search();
-	abstract void addProduct();
+	
+	void search() {
+		market.search();
+		
+	}
+	abstract void addProduct(Product product, int quantity);
 	abstract void removeProduct();
 	
 	
@@ -70,6 +80,34 @@ abstract public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public LocalDateTime getLastLogin() {
+		return lastLogin;
+	}
+	public void setLastLogin(LocalDateTime lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+
+	public Market getMarket() {
+		return market;
+	}
+
+
+	public void setMarket(Market market) {
+		this.market = market;
+	}
+	
+	
+	
+	
+	
 	
 
 	

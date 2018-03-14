@@ -9,20 +9,26 @@ import product.Product;
 
 public class Customer extends User{
 	
+	private String address;
+	private String phone;
 	HashMap<Product, Integer> cart;
 	HashSet<Product> favoritesProduct;
 	HashSet<Order> orders;	
 	
+	public Customer(String name, String lastName, String username, String password, String email) {
+		super(name, lastName, username, password, email);
+	}
+	
 
 	@Override
 	void login() {
-		// TODO Auto-generated method stub
+		super.login();;
 		
 	}
 
-	@Override
+	
 	void register() {
-		// TODO Auto-generated method stub
+		this.getMarket().registrationRequest(this);
 		
 	}
 
@@ -33,16 +39,42 @@ public class Customer extends User{
 	}
 
 	@Override
-	void addProduct() {
-		// TODO Auto-generated method stub
+	void addProduct(Product product, int quantity) {
+		if(getMarket().checkQuantity(product, quantity)) {
+			if(!cart.containsKey(product.getModel())) {
+				cart.put(product, quantity);
+			}
+			else {
+				cart.put(product, cart.get(product) + quantity);
+			}	
+		}
+			
 		
 	}	
 	
-	void addToFavorites() {
+	void addToFavorites(Product product) {
+		if(isLoginStatus()) {
+			if(!favoritesProduct.contains(product)) {
+				favoritesProduct.add(product);
+			}
+		}
+		else {
+			System.out.println("Please login");
+		}
 		
 	}
 	
 	void pay() {
+		if(isLoginStatus()) {
+			Order order = new Order(this, cart);
+			orders.add(order);
+			getMarket().removeProducts(this.cart);
+			this.cart.clear();
+			
+		}
+		else {
+			System.out.println("Please log in");
+		}
 		
 	}
 	

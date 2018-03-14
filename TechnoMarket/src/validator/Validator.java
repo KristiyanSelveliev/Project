@@ -45,5 +45,13 @@ public class Validator {
 
 		}
 
-	}
+	
+
+public static boolean validPhone(String phone) {
+	//TODO
+	return false;
+}
+}
+
+
 
