@@ -9,7 +9,7 @@ import user.User;
 public class Order {
 	
 	
-	private static int CURRENT_ORDER = 0; // TODO
+	private static int CURRENT_ORDER = 0;
 	private int id;
 	private User user;
 	private HashMap<Product, Integer> listProduct;
@@ -20,7 +20,7 @@ public class Order {
 		this.user = user;
 		this.listProduct.putAll(list);
 		this.date = LocalDate.now();
-		this.id = ++CURRENT_ORDER;
+		this.id = CURRENT_ORDER++;
 		
 	}
 	

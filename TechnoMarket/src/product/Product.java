@@ -26,6 +26,8 @@ public class Product {
 		this.price = price;
 		this.type = type;
 		//TODO id
+		this.id=Product.CURRENT_ID;
+		Product.CURRENT_ID++;
 	}
 	
 	
