@@ -2,6 +2,8 @@ package product;
 
 import java.util.ArrayList;
 
+import market.Market;
+
 public class Product {
 	public enum TYPES {
 		PC, GSM, TV
@@ -18,6 +20,14 @@ public class Product {
 	private String description;
 	ArrayList<Integer> ratings;
 	
+	public Product(String model, String description, double price, TYPES type ) {
+		this.model = model;
+		this.description = description;
+		this.price = price;
+		this.type = type;
+		//TODO id
+	}
+	
 	
 	
 	public double checkRating() {
@@ -26,6 +36,13 @@ public class Product {
 			sum += r.intValue();
 		}
 		return sum/ratings.size();
+	}
+	
+	public void addRating(int rating) {
+		if(rating > Market.MIN_RATING && rating <= Market.MAX_RATING) {
+			this.ratings.add(rating);
+
+		}
 	}
 
 

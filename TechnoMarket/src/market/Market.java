@@ -11,14 +11,14 @@ import java.util.Scanner;
 import order.Order;
 import product.Product;
 import product.Product.TYPES;
-import user.Admin;
 import user.Customer;
 import user.User;
 import validator.Validator;
 
 public class Market {
 
-	private static final int MAX_RATING = 5;
+	public static final int MIN_RATING = 1;
+	public static final int MAX_RATING = 5;
 	private static final int MAX_LOGIN_REQUEST = 5;
 	private static Market instance;
 	private String name;
@@ -169,6 +169,7 @@ public class Market {
 		Market.products = products;
 	}
 
+
 	public static void setInstance(Market instance) {
 		Market.instance = instance;
 	}
@@ -194,6 +195,12 @@ public class Market {
 		}
 		
 	}
+	
+	/*public void removeProduct(Product product) {
+		if(this.products.ge) {
+			
+		}
+	}*/
 		
 	
 

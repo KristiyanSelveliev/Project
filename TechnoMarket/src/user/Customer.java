@@ -21,6 +21,7 @@ public class Customer extends User{
 	
 
 	@Override
+	protected
 	void login() {
 		super.login();;
 		
@@ -33,12 +34,14 @@ public class Customer extends User{
 	}
 
 	@Override
+	protected
 	void search() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	protected
 	void addProduct(Product product, int quantity) {
 		if(getMarket().checkQuantity(product, quantity)) {
 			if(!cart.containsKey(product.getModel())) {
@@ -78,23 +81,33 @@ public class Customer extends User{
 		
 	}
 	
-	void refuseOrder() {
-		
-	}
 	
-	void rate() {
+	
+	void rate(Product product, int rating) {
+		if(this.getMarket().getProducts().containsKey(product.getType()) && 
+				this.getMarket().getProducts().get(product.getType()).containsKey(product)) {
+			for (Product p : this.getMarket().getProducts().get(product.getType()).keySet()) {
+				if(p.equals(product)) {
+					p.addRating(rating);
+				}
+			}
+			
+		}
+	}
+
+	@Override
+	protected
+	void removeProduct(Product product) {
+		if(this.cart.containsKey(product)) {
+			this.cart.remove(product);
+		}
 		
 	}
 
 	@Override
-	void removeProduct() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	protected
 	void logout() {
-		// TODO Auto-generated method stub
+		super.logout();
 		
 	}
 

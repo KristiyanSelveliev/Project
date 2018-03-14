@@ -28,20 +28,20 @@ abstract public class User {
 	}
 
 	
-	void login() {
+	protected void login() {
 		market.loginRequest(this);
 		
 	}
-	void logout() {
+	protected void logout() {
 		this.loginStatus = false;
 	}
 	
-	void search() {
+	protected void search() {
 		market.search();
 		
 	}
-	abstract void addProduct(Product product, int quantity);
-	abstract void removeProduct();
+	abstract protected void addProduct(Product product, int quantity);
+	abstract protected void removeProduct(Product product);
 	
 	
 	public boolean isLoginStatus() {
