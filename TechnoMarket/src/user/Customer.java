@@ -3,6 +3,7 @@ package user;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.HashMap;
 
 import order.Order;
@@ -15,7 +16,8 @@ public class Customer extends User{
 	private LocalDate registrationDate;	
 	HashMap<Product, Integer> cart = new HashMap<>();
 	HashSet<Product> favoritesProduct = new HashSet<>();
-	HashSet<Order> orders = new HashSet<>();	
+	HashSet<Order> orders = new HashSet<>();
+	Scanner scanner = new Scanner(System.in);
 	
 	public Customer(String name, String lastName, String username, String password, String email) {
 		super(name, lastName, username, password, email);
@@ -78,7 +80,8 @@ public class Customer extends User{
 			orders.add(order);
 			getMarket().removeProducts(this.cart);
 			this.cart.clear();
-			//TODO register address
+			System.out.println("Please enter delivery address: ");
+			this.address = scanner.nextLine();
 			System.out.println("Your order is finished");
 			
 		}
