@@ -59,8 +59,6 @@ public class Market {
 		
 		
 		
-		
-		
 	}
 
 	public static final int MIN_RATING = 1;

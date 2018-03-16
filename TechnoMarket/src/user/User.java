@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import market.Market;
+import myExceptions.InvalidFormatInput;
 import myExceptions.LoginException;
 import product.Product;
+import validator.Validator;
 
 abstract public class User {
 	
@@ -51,6 +53,21 @@ abstract public class User {
 		market.search();
 		
 	}
+	
+	public void changePassword(String password) {
+		try {
+			if(Validator.validPassword(password)) {
+				this.password = password;
+			}
+			else {
+				throw new InvalidFormatInput("Invalid password - password must contain at 8 characters, at least 1 lower case letter, at least 1 upper case letter,\\\\r\\\\n\\\" + \\r\\n\"\r\n" + 
+						"											+ \"								\\\"at least 1 numeric character, without spaces ");
+			}
+		}catch (InvalidFormatInput e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	abstract protected void addProduct(Product product, int quantity);
 	abstract protected void removeProduct(Product product);
 	
