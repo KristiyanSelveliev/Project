@@ -6,6 +6,8 @@ public class Demo {
 		
 		Market market = Market.getInstance();
 		
+		
+		
 	}
 
 }

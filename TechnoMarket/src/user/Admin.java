@@ -50,6 +50,14 @@ public class Admin extends User{
 		//TODO validate quantity
 	}
 	
+	public void editProductPrice(Product product, double price) {
+		product.setPrice(price);
+	}
+	
+	public void editProductDescription(Product product, String description) {
+		product.setDescription(description);
+	}
+	
 	
 	
 	public void createProduct(String model, String description, double price, Product.TYPES type, int quantity) {
