@@ -28,11 +28,39 @@ import validator.Validator;
 
 
 public class Market {
+	
+	
+	
+	static {
+		
+		ArrayList<Customer> customersList = new ArrayList<>();
+		Admin admin = new Admin("Admin", "Adminov", "admincho", "admin40@@", "admin@abv.bg");
+		ArrayList<Product> productsList = new ArrayList<>();
+		
+		for (int i = 0; i < 10; i++) {
+			Product pro = new Product("product" + (i + 1), "name" + (i + 1), Validator.randomInt(50, 3000), Market.types[Validator.randomInt(0, Market.types.length)]);
+			productsList.add(pro);
+		}
+		
+		for(int j = 0; j < 2; j++) {
+			Customer customer = new Customer("User" + (j + 1), "Petrov" + (j + 1), "usercho" + (j + 1), "user40@@@", "user@abv.bg");
+			customersList.add(customer);
+			Market.users.put(customer.getUsername(), customer);
+		}
+		
+		Market.admins.add(admin);
+		
+		
+		
+		
+		
+		
+	}
 
 	public static final int MIN_RATING = 1;
 	public static final int MAX_RATING = 5;
 	private static final int MAX_LOGIN_REQUEST = 5;
-	private HashSet<String> types = new HashSet<>(Arrays.asList("TV", "GSM", "PC"));
+	private static TYPES[] types = new TYPES[]{TYPES.PC, TYPES.GSM, TYPES.TV};
 	private static Market instance;
 	private String name;
 	private HashSet<Order> orders = new HashSet<>();

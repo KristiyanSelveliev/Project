@@ -1,5 +1,7 @@
 package validator;
 
+import java.util.Random;
+
 public class Validator {
 	
 	private static final String VALIDATE_EMAIL = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}".toLowerCase();
@@ -51,6 +53,10 @@ public class Validator {
 			return false;
 		}
 		return a > 0;
+	}
+	
+	public static int randomInt(int a, int b) {
+		return new Random().nextInt(b - a) + a;
 	}
 	
 	
