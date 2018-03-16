@@ -71,6 +71,7 @@ public class Customer extends User{
 	}
 	
 	public void finishOrder() {
+		//proba
 		if(isLoginStatus()) {
 			Order order = new Order(this, cart);
 			orders.add(order);
