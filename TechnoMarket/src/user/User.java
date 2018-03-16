@@ -15,7 +15,6 @@ abstract public class User {
 	private String password;
 	private String email;
 	private LocalDateTime lastLogin;
-	private LocalDate registrationDate;	
 	private Market market = Market.getInstance();
 	private boolean loginStatus;
 	
@@ -33,7 +32,9 @@ abstract public class User {
 		
 	}
 	protected void logout() {
-		this.loginStatus = false;
+		if(!this.isLoginStatus()) {
+			this.loginStatus = false;
+		}
 	}
 	
 	protected void search() {
@@ -87,13 +88,6 @@ abstract public class User {
 	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-	public LocalDate getRegistrationDate() {
-		return registrationDate;
-	}
-	public void setRegistrationDate(LocalDate registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
 
 	public Market getMarket() {
 		return market;
@@ -103,6 +97,53 @@ abstract public class User {
 	public void setMarket(Market market) {
 		this.market = market;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

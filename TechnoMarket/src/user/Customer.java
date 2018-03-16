@@ -1,5 +1,6 @@
 package user;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.HashMap;
@@ -11,12 +12,14 @@ public class Customer extends User{
 	
 	private String address;
 	private String phone;
+	private LocalDate registrationDate;	
 	HashMap<Product, Integer> cart;
 	HashSet<Product> favoritesProduct;
 	HashSet<Order> orders;	
 	
 	public Customer(String name, String lastName, String username, String password, String email) {
 		super(name, lastName, username, password, email);
+		this.registrationDate = LocalDate.now();
 	}
 	
 
@@ -36,7 +39,7 @@ public class Customer extends User{
 	@Override
 	protected
 	void search() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -59,6 +62,9 @@ public class Customer extends User{
 		if(isLoginStatus()) {
 			if(!favoritesProduct.contains(product)) {
 				favoritesProduct.add(product);
+			}
+			else {
+				System.out.println("This product is already in your favorite list");
 			}
 		}
 		else {
@@ -110,5 +116,7 @@ public class Customer extends User{
 		super.logout();
 		
 	}
+	
+	
 
 }

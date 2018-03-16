@@ -25,7 +25,7 @@ public class Product {
 		this.description = description;
 		this.price = price;
 		this.type = type;
-		//TODO id
+		this.id = Product.returnCurrentID();
 	}
 	
 	
@@ -39,24 +39,16 @@ public class Product {
 	}
 	
 	public void addRating(int rating) {
-		if(rating > Market.MIN_RATING && rating <= Market.MAX_RATING) {
+		if(rating >= Market.MIN_RATING && rating <= Market.MAX_RATING) {
 			this.ratings.add(rating);
 
 		}
 	}
-
-
-
-	public static int getCURRENT_ID() {
-		return CURRENT_ID;
+	
+	
+	private static int returnCurrentID() {
+		return ++Product.CURRENT_ID;
 	}
-
-
-
-	public static void setCURRENT_ID(int cURRENT_ID) {
-		CURRENT_ID = cURRENT_ID;
-	}
-
 
 
 	public int getId() {
@@ -128,6 +120,54 @@ public class Product {
 	public void setRatings(ArrayList<Integer> ratings) {
 		this.ratings = ratings;
 	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id != other.id)
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

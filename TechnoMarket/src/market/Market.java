@@ -2,12 +2,19 @@ package market;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 
+
+
+
+
+import myExceptions.InvalidFormatInput;
 import order.Order;
 import product.Product;
 import product.Product.TYPES;
@@ -20,6 +27,7 @@ public class Market {
 	public static final int MIN_RATING = 1;
 	public static final int MAX_RATING = 5;
 	private static final int MAX_LOGIN_REQUEST = 5;
+	private HashSet<String> types = new HashSet<>(Arrays.asList("TV", "GSM", "PC"));
 	private static Market instance;
 	private String name;
 	private HashSet<Order> orders;
@@ -81,9 +89,14 @@ public class Market {
 	}
 
 	public void registrationRequest(User user) {
+		
+		try {
 		System.out.println("Enter name and lastName");
 		String name = scanner.nextLine();
 		String lastName = scanner.nextLine();
+		if(!Validator.validateString(name) || !Validator.validateString(lastName)) {
+			throw new InvalidFormatInput("Invalid name");
+		}
 		System.out.println("Enter username:");
 		String username = scanner.nextLine();
 		if(Validator.validUsername(username)) {
@@ -93,31 +106,46 @@ public class Market {
 				if(Validator.validEMail(email)) {
 					System.out.println("Enter a password - password must be... ");
 					String password = scanner.nextLine();
-					System.out.println("Enter pass again:");
+					if(!Validator.validateString(password)) {
+						throw new InvalidFormatInput("Invalid password - password must contain at 8 characters, at least 1 lower case letter, at least 1 upper case letter,\\r\\n\" + \r\n" + 
+								"								\"at least 1 numeric character, without spaces ");
+					}
+					System.out.println("Enter a passord again:");
 					String password1 = scanner.nextLine();
 					if(password.equals(password1)) {					
-						Customer customer = new Customer(name, lastName, username, password, email);
-						customer.setRegistrationDate(LocalDate.now());
+						Customer customer = new Customer(name, lastName, username, password, email);			
 						this.users.put(username, customer);
 					}
 					else {
-						System.out.println("DIfferent passwords");
+						throw new InvalidFormatInput("Passwords not equal.");
+					
 					}
 				}
 				else {
-					System.out.println("Invalid email");
+					throw new InvalidFormatInput("Invalid email");
+				
 				}
 				
 			}
 			else {
-				System.out.println("Enter a different username");
+				throw new InvalidFormatInput("The username is already taken. Choose another username.");
+	
 			}			
 		}
 		else {
-			System.out.println("Enter a valid username");
+			throw new InvalidFormatInput("Enter a valid username - al least 4 digits, without spaces.");
 		}
+		}catch (Exception e) {
+			System.out.println("Unsuccessful registration. Do you want to try again? Y/N");
+			String input = scanner.nextLine();
+			if(input.equalsIgnoreCase("y")) {
+				registrationRequest(user);
+			}
+		}		
 		
 	}
+	
+	
 
 	public void search() {
 		String product = scanner.nextLine();
@@ -134,6 +162,7 @@ public class Market {
 	}
 	
 	public void sellProducts(HashMap<Product, Integer> products) {
+		
 		
 	}
 
@@ -194,6 +223,19 @@ public class Market {
 			// da se testva!!!			
 		}
 		
+	}
+	
+	public HashSet<String> getTypes() {
+		return this.types;
+	}
+	
+	public boolean validateProductType(String type) {
+		for (String  s : this.types) {
+			if(type.equals(s)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/*public void removeProduct(Product product) {
