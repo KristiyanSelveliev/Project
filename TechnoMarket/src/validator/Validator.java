@@ -38,10 +38,18 @@ public class Validator {
 	}
 	
 	public static boolean checkForPositiveNum(int a) {
+		if(a < 0) {
+			System.out.println("Please enter correct number");
+			return false;
+		}
 		return a > 0;
 	}
 	
 	public static boolean checkForPositiveNum(double a) {
+		if(a < 0) {
+			System.out.println("Please enter correct number");
+			return false;
+		}
 		return a > 0;
 	}
 	

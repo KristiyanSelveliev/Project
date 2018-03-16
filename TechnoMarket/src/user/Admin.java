@@ -37,21 +37,26 @@ public class Admin extends User{
 
 	@Override
 	public void addProduct(Product product, int quantity) {
-		if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
-			getMarket().getProducts().get(product.getType())
-			.put(product, getMarket().getProducts().get(product.getType()).get(product) + quantity);
-		
+		if(Validator.checkForPositiveNum(quantity)) {
+			if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
+				getMarket().getProducts().get(product.getType())
+				.put(product, getMarket().getProducts().get(product.getType()).get(product) + quantity);
+			
+			}
 		}
-		//TODO validate quantity
+		
+		
 	}
 	
-	public void editProductQuantity(Product product, int quantity) {		
-		if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
-			getMarket().getProducts().get(product.getType())
-			.put(product, quantity);
-		
+	public void editProductQuantity(Product product, int quantity) {	
+		if(Validator.checkForPositiveNum(quantity)) {
+			if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
+				getMarket().getProducts().get(product.getType())
+				.put(product, quantity);
+			
+			}
 		}
-		//TODO validate quantity
+		
 	}
 	
 	public void editProductPrice(Product product, double price) {

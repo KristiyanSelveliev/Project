@@ -25,7 +25,8 @@ public class Customer extends User{
 
 	@Override
 	public void login() {
-		super.login();;
+		super.login();
+		//this.setLoginStatus(true);
 		
 	}
 
@@ -78,6 +79,7 @@ public class Customer extends User{
 			getMarket().removeProducts(this.cart);
 			this.cart.clear();
 			//TODO register address
+			System.out.println("Your order is finished");
 			
 		}
 		else {
@@ -97,10 +99,14 @@ public class Customer extends User{
 
 					if(p.equals(product)) {
 						p.addRating(rating);
+						
 					}
 				}			
 			}			
-		}			
+		}
+		else {
+			System.out.println("Can't rate! Please log in");
+		}
 		
 	}
 

@@ -39,7 +39,7 @@ public class Market {
 	private static HashSet<Admin> admins = new HashSet<>();
 	private static HashMap<String, User> users = new HashMap<>(); // zashto da sa static
 	private static HashMap<Product.TYPES, HashMap<Product, Integer>> products = new HashMap<>();
-	private static TreeMap<Product, Integer> mostWanted = new TreeMap<>();
+	private static HashMap<Product, Integer> mostWanted = new HashMap<>();
 	Scanner scanner = new Scanner(System.in);
 
 	private Market() {

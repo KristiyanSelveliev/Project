@@ -44,6 +44,7 @@ public class Product {
 	public void addRating(int rating) {
 		if(rating >= Market.MIN_RATING && rating <= Market.MAX_RATING) {
 			this.ratings.add(rating);
+			System.out.println("Successful rate");
 		}
 		else {
 			System.out.println("Invalid integer");
