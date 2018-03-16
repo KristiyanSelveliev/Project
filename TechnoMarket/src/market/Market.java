@@ -49,6 +49,12 @@ public class Market {
 		}
 		
 		Market.admins.add(admin);
+		for (Product product : productsList) {
+			if(!Market.products.containsKey(product.getType())) {
+				Market.products.put(product.getType(), new HashMap<>());
+			}
+			Market.products.get(product.getType()).put(product, Validator.randomInt(20,  50));
+		}
 		
 		
 		
