@@ -1,15 +1,18 @@
 package market;
 
+import java.awt.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -18,9 +21,11 @@ import myExceptions.LoginException;
 import order.Order;
 import product.Product;
 import product.Product.TYPES;
+import user.Admin;
 import user.Customer;
 import user.User;
 import validator.Validator;
+
 
 public class Market {
 
@@ -31,18 +36,22 @@ public class Market {
 	private static Market instance;
 	private String name;
 	private HashSet<Order> orders = new HashSet<>();
+	private static HashSet<Admin> admins = new HashSet<>();
 	private static HashMap<String, User> users = new HashMap<>(); // zashto da sa static
 	private static HashMap<Product.TYPES, HashMap<Product, Integer>> products = new HashMap<>();
 	private static TreeMap<Product, Integer> mostWanted = new TreeMap<>();
 	Scanner scanner = new Scanner(System.in);
 
 	private Market() {
+		
 		// TODO da go pogledna posle
 	}
 
 	public static Market getInstance() {
 		if (instance == null) {
 			instance = new Market();
+			generateAdmins(3);
+			generateCust(3);
 		}
 		return instance;
 
@@ -55,16 +64,17 @@ public class Market {
 		try {
 			while (counter > 0) {
 				System.out.println("Enter a username: ");
-				String username = scanner.nextLine();
+				String username = scanner.nextLine().toLowerCase();
 				counter--;
 
 				if (Validator.validUsername(username)) {
 					if (users.containsKey(username)) {
 						System.out.println("Enter a password: ");
 						String password = scanner.nextLine();
-						if (users.get(username).getPassword().equals(password)) {
-							users.get(username).setLoginStatus(true);
-							users.get(username).setLastLogin(LocalDateTime.now());
+						if (users.get(username.toLowerCase()).getPassword().equals(password)) {
+							users.get(username.toLowerCase()).setLoginStatus(true);
+							users.get(username.toLowerCase()).setLastLogin(LocalDateTime.now());
+							System.out.println("Successful registration");
 							return;
 						} else {
 							invalidLogin = true;
@@ -96,10 +106,10 @@ public class Market {
 	public void registrationRequest(User user) {
 
 		try {
-			System.out.println("Enter name and lastName");
+			System.out.println("Enter name and lastName: ");
 			String name = scanner.nextLine();
 			String lastName = scanner.nextLine();
-			if (!Validator.validateString(name) | !Validator.validateString(lastName)) {
+			if (!Validator.validateString(name.toLowerCase()) | !Validator.validateString(lastName)) {
 				throw new InvalidFormatInput("Invalid name");
 			}
 			System.out.println("Enter username:");
@@ -135,7 +145,7 @@ public class Market {
 
 				}
 			} else {
-				throw new InvalidFormatInput("Enter a valid username - al least 4 digits, without spaces.");
+				throw new InvalidFormatInput("Enter a valid username - al least 4 characters, without spaces.");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -178,8 +188,8 @@ public class Market {
 		//TODO validation
 	}
 
-	public static HashMap<Product.TYPES, HashMap<Product, Integer>> getProducts() {
-		return (HashMap<TYPES, HashMap<Product, Integer>>) Collections.unmodifiableMap(products);
+	public static Map<Product.TYPES, HashMap<Product, Integer>> getProducts() {
+		return products;
 	}
 
 	public static void setProducts(HashMap<Product.TYPES, HashMap<Product, Integer>> products) {
@@ -236,5 +246,47 @@ public class Market {
 		}
 		return false;
 	}
+	
+	
+	public static void generateAdmins(int a) {
+		for (int i = 0; i < a; i++) {
+			admins.add(new Admin("Admin" + (i + 1), "Adminov", "admin" + (i + 1), "admin40@1A" + (i + 1), "admin@abv.bg"));
+		}
+		
+	}
+	
+	public static void generateCust(int a) {
+		for (int i = 0; i < a; i++) {
+			users.put("peshko" + (i + 1),new Customer("Customer" + (i + 1), "Cus", "peshko" + (i + 1), "admin40@1A" + (i + 1), "admin@abv.bg"));
+		}		
+	}
+	
+	public static Admin getRandomAdmin() {
+		ArrayList<Admin> xAdmins = new ArrayList<>();
+		xAdmins.addAll(admins);
+		return	xAdmins.get(new Random().nextInt(xAdmins.size()));
+	}
+	
+	public static Customer getRandomCust() {
+		ArrayList<Customer> custList = new ArrayList<>();
+		List xList = (List) users.values();
+		
+		custList.addAll((Collection<? extends Customer>) xList);
+		return	custList.get(new Random().nextInt(custList.size()));
+		
+	}
+
+	public static HashSet<Admin> getAdmins() {
+		return (HashSet<Admin>) Collections.unmodifiableSet(admins);
+	}
+
+	
+	public static HashMap<String, User> getUsers() {
+		return (HashMap<String, User>) Collections.unmodifiableMap(users);
+	}
+
+	
+	
+	
 
 }

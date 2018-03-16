@@ -13,9 +13,9 @@ public class Customer extends User{
 	private String address;
 	private String phone;
 	private LocalDate registrationDate;	
-	HashMap<Product, Integer> cart;
-	HashSet<Product> favoritesProduct;
-	HashSet<Order> orders;	
+	HashMap<Product, Integer> cart = new HashMap<>();
+	HashSet<Product> favoritesProduct = new HashSet<>();
+	HashSet<Order> orders = new HashSet<>();	
 	
 	public Customer(String name, String lastName, String username, String password, String email) {
 		super(name, lastName, username, password, email);
@@ -30,7 +30,7 @@ public class Customer extends User{
 	}
 
 	
-	void register() {
+	public void register() {
 		this.getMarket().registrationRequest(this);
 		
 	}
@@ -70,7 +70,7 @@ public class Customer extends User{
 		
 	}
 	
-	void finishOrder() {
+	public void finishOrder() {
 		if(isLoginStatus()) {
 			Order order = new Order(this, cart);
 			orders.add(order);
@@ -88,15 +88,18 @@ public class Customer extends User{
 	
 	
 	
-	void rate(Product product, int rating) {
-		if(this.getMarket().getProducts().containsKey(product.getType()) && 
-				this.getMarket().getProducts().get(product.getType()).containsKey(product)) {
-			for (Product p : this.getMarket().getProducts().get(product.getType()).keySet()) {
-				if(p.equals(product)) {
-					p.addRating(rating);
-				}
-			}			
-		}
+	public void rate(Product product, int rating) {
+	
+			if(this.getMarket().getProducts().containsKey(product.getType()) && 
+					this.getMarket().getProducts().get(product.getType()).containsKey(product)) {
+				for (Product p : this.getMarket().getProducts().get(product.getType()).keySet()) {
+
+					if(p.equals(product)) {
+						p.addRating(rating);
+					}
+				}			
+			}
+		
 	}
 
 	@Override

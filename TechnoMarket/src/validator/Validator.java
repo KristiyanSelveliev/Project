@@ -2,7 +2,8 @@ package validator;
 
 public class Validator {
 	
-	private static final String VALIDATE_EMAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+	private static final String VALIDATE_EMAIL = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}".toLowerCase();
+
 
 	//username must be at least 4 characters, without spaces
 	private static final String VALIDATE_USERNAME = "(\\S){4,}";

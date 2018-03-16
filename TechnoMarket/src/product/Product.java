@@ -19,7 +19,7 @@ public class Product {
 	private TYPES type;
 	private String model;
 	private String description;
-	private ArrayList<Integer> ratings;
+	private ArrayList<Integer> ratings = new ArrayList<>();
 	
 	public Product(String model, String description, double price, TYPES type ) {
 		this.model = model;
@@ -44,7 +44,9 @@ public class Product {
 	public void addRating(int rating) {
 		if(rating >= Market.MIN_RATING && rating <= Market.MAX_RATING) {
 			this.ratings.add(rating);
-
+		}
+		else {
+			System.out.println("Invalid integer");
 		}
 	}
 	

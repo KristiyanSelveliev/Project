@@ -12,7 +12,7 @@ public class Order {
 	private static int CURRENT_ORDER = 0;
 	private int id;
 	private User user;
-	private HashMap<Product, Integer> listProduct;
+	private HashMap<Product, Integer> listProduct = new HashMap<>();
 	private LocalDate date;
 	private String status;
 	

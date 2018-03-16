@@ -2,6 +2,8 @@ package user;
 
 
 
+import java.util.HashMap;
+
 import myExceptions.InvalidFormatInput;
 import product.Product;
 import product.Product.TYPES;
@@ -13,12 +15,14 @@ public class Admin extends User{
 
 	public Admin(String name, String lastName, String username, String password, String email) {
 		super(name, lastName, username, password, email);
+	
 	}
 
 
 
 	@Override	
 	public void login() {
+		
 		super.login();
 		
 	}
@@ -87,6 +91,18 @@ public class Admin extends User{
 			e.getMessage();
 		}
 		
+		
+		
+	}
+	
+	public void createProduct(Product product, int quantity) {
+		if(getMarket().getProducts().containsKey(product.getType())) {
+			getMarket().getProducts().get(product.getType()).put(product, quantity);
+		}
+		else {
+			getMarket().getProducts().put(product.getType(), new HashMap<>());
+			getMarket().getProducts().get(product.getType()).put(product, quantity);
+		}
 		
 		
 	}
