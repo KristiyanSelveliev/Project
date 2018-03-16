@@ -72,6 +72,7 @@ public class Market {
 	private static HashMap<String, User> users = new HashMap<>();
 	private static HashMap<Product.TYPES, HashMap<Product, Integer>> products = new HashMap<>();
 	private static HashMap<Product, Integer> mostWanted = new HashMap<>();
+	private static HashSet<Customer> subscribers = new HashSet<>();
 	Scanner scanner = new Scanner(System.in);
 
 	private Market() {
@@ -324,6 +325,15 @@ public class Market {
 	public static HashMap<String, User> getUsers() {
 		return (HashMap<String, User>) Collections.unmodifiableMap(users);
 	}
+
+	public void subscribeUser(Customer customer) {
+		Market.subscribers.add(customer);
+		
+	}
+	
+	
+	
+	
 
 	
 	

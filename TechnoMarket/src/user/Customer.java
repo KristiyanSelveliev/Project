@@ -127,6 +127,10 @@ public class Customer extends User{
 		
 	}
 	
+	public void subscribe() {
+		getMarket().subscribeUser(this);
+	}
+	
 	
 
 }
