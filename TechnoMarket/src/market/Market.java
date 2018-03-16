@@ -52,6 +52,10 @@ public class Market {
 			instance = new Market();
 			generateAdmins(3);
 			generateCust(3);
+			products.put(TYPES.GSM, new HashMap());
+			products.put(TYPES.PC, new HashMap());
+			products.put(TYPES.TV, new HashMap());
+			
 		}
 		return instance;
 
