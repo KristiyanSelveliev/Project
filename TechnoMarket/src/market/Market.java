@@ -30,6 +30,7 @@ public class Market {
 	private HashSet<String> types = new HashSet<>(Arrays.asList("TV", "GSM", "PC"));
 	private static Market instance;
 	private String name;
+	//TODO Customer orders
 	private HashSet<Order> orders;
 	private static HashMap<String, User> users;
 	private static HashMap<Product.TYPES, HashMap<Product, Integer>> products;
@@ -174,21 +175,21 @@ public class Market {
 		this.name = name;
 	}
 
-	public HashSet<Order> getOrders() {
+	/*public HashSet<Order> getOrders() {
 		return orders;
-	}
+	}*/
 
-	public void setOrders(HashSet<Order> orders) {
+	/*public void setOrders(HashSet<Order> orders) {
 		this.orders = orders;
-	}
+	}*/
 
-	public static HashMap<String, User> getUsers() {
+	/*public static HashMap<String, User> getUsers() {
 		return users;
-	}
+	}*/
 
-	public static void setUsers(HashMap<String, User> users) {
+	/*public static void setUsers(HashMap<String, User> users) {
 		Market.users = users;
-	}
+	}*/
 
 	public static HashMap<Product.TYPES, HashMap<Product, Integer>> getProducts() {
 		return (HashMap<TYPES, HashMap<Product, Integer>>) Collections.unmodifiableMap(products);
@@ -199,9 +200,7 @@ public class Market {
 	}
 
 
-	public static void setInstance(Market instance) {
-		Market.instance = instance;
-	}
+	
 
 	public boolean checkQuantity(Product product, int quantity) {
 		if(this.products.containsKey(product.getType())) {

@@ -26,6 +26,7 @@ public class Product {
 		this.price = price;
 		this.type = type;
 		this.id = Product.returnCurrentID();
+
 	}
 	
 	
