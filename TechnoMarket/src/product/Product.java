@@ -3,6 +3,7 @@ package product;
 import java.util.ArrayList;
 
 import market.Market;
+import validator.Validator;
 
 public class Product {
 	public enum TYPES {
@@ -13,19 +14,20 @@ public class Product {
 	private static int CURRENT_ID = 0;
 	
 	
-	private int id;
+	private final int ID;
 	private double price;
 	private TYPES type;
 	private String model;
 	private String description;
-	ArrayList<Integer> ratings;
+	private ArrayList<Integer> ratings;
 	
 	public Product(String model, String description, double price, TYPES type ) {
 		this.model = model;
 		this.description = description;
 		this.price = price;
 		this.type = type;
-		this.id = Product.returnCurrentID();
+		//this.ID = Product.returnCurrentID();
+		this.ID = ++CURRENT_ID;
 
 	}
 	
@@ -47,20 +49,10 @@ public class Product {
 	}
 	
 	
-	private static int returnCurrentID() {
-		return ++Product.CURRENT_ID;
-	}
-
-
 	public int getId() {
-		return id;
+		return ID;
 	}
 
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 
 
@@ -71,7 +63,9 @@ public class Product {
 
 
 	public void setPrice(double price) {
-		this.price = price;
+		if(Validator.checkForPositiveNum(price)) {
+			this.price = price;
+		}
 	}
 
 
@@ -95,7 +89,9 @@ public class Product {
 
 
 	public void setModel(String model) {
-		this.model = model;
+		if(Validator.validateString(model)) {
+			this.model = model;
+		}
 	}
 
 
@@ -107,15 +103,10 @@ public class Product {
 
 
 	public void setDescription(String description) {
-		this.description = description;
+		if(Validator.validateString(description)) {
+			this.description = description;
+		}
 	}
-
-
-
-	public ArrayList<Integer> getRatings() {
-		return ratings;
-	}
-
 
 
 	public void setRatings(ArrayList<Integer> ratings) {
@@ -129,7 +120,7 @@ public class Product {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
+		result = prime * result + ID;
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
@@ -154,7 +145,7 @@ public class Product {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
+		if (ID != other.ID)
 			return false;
 		if (model == null) {
 			if (other.model != null)

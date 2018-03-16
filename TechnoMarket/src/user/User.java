@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import market.Market;
+import myExceptions.LoginException;
 import product.Product;
 
 abstract public class User {
@@ -27,17 +28,25 @@ abstract public class User {
 	}
 
 	
-	protected void login() {
+	public void login() {
 		market.loginRequest(this);
 		
 	}
-	protected void logout() {
+	public void logout() {
+		try {
 		if(!this.isLoginStatus()) {
 			this.loginStatus = false;
 		}
+		else {
+			throw new LoginException("Invalid operation");
+		}
+		}
+		catch (LoginException e) {
+			e.getMessage();
+		} 
 	}
 	
-	protected void search() {
+	public void search() {
 		market.search();
 		
 	}

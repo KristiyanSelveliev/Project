@@ -1,11 +1,10 @@
-package market;
+package user;
 
 
 
 import myExceptions.InvalidFormatInput;
 import product.Product;
 import product.Product.TYPES;
-import user.User;
 import validator.Validator;
 
 public class Admin extends User{
@@ -18,24 +17,22 @@ public class Admin extends User{
 
 
 
-	@Override
-	protected
-	void login() {
+	@Override	
+	public void login() {
 		super.login();
 		
 	}
 
 
 
-	@Override
-	protected
-	void search() {
+	@Override	
+	public void search() {
 		super.search();
 		
 	}
 
 	@Override
-	protected void addProduct(Product product, int quantity) {
+	public void addProduct(Product product, int quantity) {
 		if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
 			getMarket().getProducts().get(product.getType())
 			.put(product, getMarket().getProducts().get(product.getType()).get(product) + quantity);
@@ -44,7 +41,7 @@ public class Admin extends User{
 		//TODO validate quantity
 	}
 	
-	void editProductQuantity(Product product, int quantity) {		
+	public void editProductQuantity(Product product, int quantity) {		
 		if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
 			getMarket().getProducts().get(product.getType())
 			.put(product, quantity);
@@ -55,23 +52,22 @@ public class Admin extends User{
 	
 	
 	
-	void createProduct(String model, String description, double price, Product.TYPES type, int quantity) {
+	public void createProduct(String model, String description, double price, Product.TYPES type, int quantity) {
 		try {
 		if(Validator.validateString(model) && Validator.validateString(description) &&
 				Validator.checkForPositiveNum(price) && Validator.checkForPositiveNum(quantity)) {
-			if(this.getMarket().getTypes().contains(type)) {
+			if(this.getMarket().getProducts().containsKey(type)) {
 				Product product = new Product(model, description, price, type);
 				getMarket().getProducts().get(product.getType()).put(product, quantity);
 			}
 			else {
-				this.getMarket().getTypes().add(type.toString());
 				Product product = new Product(model, description, price, type);
 				getMarket().getProducts().get(product.getType()).put(product, quantity);				
 			}			
 		}
 		else {
 			String cause;
-			if(!Validator.validateString(model) || !Validator.validateString(description)) {
+			if(!Validator.validateString(model) | !Validator.validateString(description)) {
 				cause = "Please enter a valid string";
 			}
 			else {
@@ -80,7 +76,7 @@ public class Admin extends User{
 			throw new InvalidFormatInput(cause);
 		}
 		}catch(InvalidFormatInput e) {
-			// TODO ??????????
+			e.getMessage();
 		}
 		
 		
@@ -89,8 +85,7 @@ public class Admin extends User{
 
 
 	@Override
-	protected
-	void removeProduct(Product product) {
+	public void removeProduct(Product product) {
 		if(getMarket().getProducts().get(product.getType()).containsKey(product)) {
 			getMarket().getProducts().get(product.getType()).remove(product);
 		}
@@ -98,8 +93,7 @@ public class Admin extends User{
 	}
 
 	@Override
-	protected
-	void logout() {
+	public void logout() {
 		super.logout();
 		
 	}

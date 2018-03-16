@@ -24,8 +24,7 @@ public class Customer extends User{
 	
 
 	@Override
-	protected
-	void login() {
+	public void login() {
 		super.login();;
 		
 	}
@@ -37,15 +36,13 @@ public class Customer extends User{
 	}
 
 	@Override
-	protected
-	void search() {
+	public void search() {
 		
 		
 	}
 
 	@Override
-	protected
-	void addProduct(Product product, int quantity) {
+	public void addProduct(Product product, int quantity) {
 		if(getMarket().checkQuantity(product, quantity)) {
 			if(!cart.containsKey(product.getModel())) {
 				cart.put(product, quantity);
@@ -73,16 +70,18 @@ public class Customer extends User{
 		
 	}
 	
-	void pay() {
+	void finishOrder() {
 		if(isLoginStatus()) {
 			Order order = new Order(this, cart);
 			orders.add(order);
 			getMarket().removeProducts(this.cart);
 			this.cart.clear();
+			//TODO register address
 			
 		}
 		else {
 			System.out.println("Please log in");
+			//TODO exception
 		}
 		
 	}
@@ -96,14 +95,12 @@ public class Customer extends User{
 				if(p.equals(product)) {
 					p.addRating(rating);
 				}
-			}
-			
+			}			
 		}
 	}
 
 	@Override
-	protected
-	void removeProduct(Product product) {
+	public void removeProduct(Product product) {
 		if(this.cart.containsKey(product)) {
 			this.cart.remove(product);
 		}
@@ -111,8 +108,7 @@ public class Customer extends User{
 	}
 
 	@Override
-	protected
-	void logout() {
+	public void logout() {
 		super.logout();
 		
 	}
