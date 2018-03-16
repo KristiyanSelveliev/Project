@@ -175,6 +175,7 @@ public class Market {
 
 	public void setName(String name) {
 		this.name = name;
+		//TODO validation
 	}
 
 	public static HashMap<Product.TYPES, HashMap<Product, Integer>> getProducts() {
