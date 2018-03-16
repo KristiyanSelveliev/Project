@@ -64,17 +64,19 @@ public class Market {
 		try {
 			while (counter > 0) {
 				System.out.println("Enter a username: ");
-				String username = scanner.nextLine().toLowerCase();
+				String username = scanner.nextLine();
 				counter--;
 
 				if (Validator.validUsername(username)) {
 					if (users.containsKey(username)) {
 						System.out.println("Enter a password: ");
 						String password = scanner.nextLine();
-						if (users.get(username.toLowerCase()).getPassword().equals(password)) {
-							users.get(username.toLowerCase()).setLoginStatus(true);
-							users.get(username.toLowerCase()).setLastLogin(LocalDateTime.now());
-							System.out.println("Successful registration");
+						if (users.get(username).getPassword().equals(password)) {
+							//System.out.println(users.get(username).isLoginStatus());
+							users.get(username).setLoginStatus(true);
+							//System.out.println(users.get(username).isLoginStatus());
+							users.get(username).setLastLogin(LocalDateTime.now());
+							System.out.println("Successful login");
 							return;
 						} else {
 							invalidLogin = true;
@@ -131,6 +133,8 @@ public class Market {
 						if (password.equals(password1)) {
 							Customer customer = new Customer(name, lastName, username, password, email);
 							this.users.put(username, customer);
+							System.out.println("Successful registration");
+							return;
 						} else {
 							throw new InvalidFormatInput("Passwords not equal.");
 

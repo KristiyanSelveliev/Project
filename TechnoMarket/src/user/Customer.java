@@ -55,7 +55,7 @@ public class Customer extends User{
 		
 	}	
 	
-	void addToFavorites(Product product) {
+	public void addToFavorites(Product product) {
 		if(isLoginStatus()) {
 			if(!favoritesProduct.contains(product)) {
 				favoritesProduct.add(product);
@@ -90,7 +90,7 @@ public class Customer extends User{
 	
 	
 	public void rate(Product product, int rating) {
-	
+		if(isLoginStatus()) {
 			if(this.getMarket().getProducts().containsKey(product.getType()) && 
 					this.getMarket().getProducts().get(product.getType()).containsKey(product)) {
 				for (Product p : this.getMarket().getProducts().get(product.getType()).keySet()) {
@@ -99,7 +99,8 @@ public class Customer extends User{
 						p.addRating(rating);
 					}
 				}			
-			}
+			}			
+		}			
 		
 	}
 

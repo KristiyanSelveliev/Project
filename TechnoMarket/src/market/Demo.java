@@ -37,7 +37,9 @@ public class Demo {
 			//Product product = new Product("model" + (i + 1), "descr"+ (i + 1), 100, TYPES.PC);
 			customer.addProduct(product2, 2);
 			customer.rate(product2, 300);
-			customer.fi
+			customer.login();
+			//customer.addToFavorites(product2);
+			//customer.finishOrder();
 			
 			
 		}
