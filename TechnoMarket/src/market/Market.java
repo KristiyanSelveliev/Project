@@ -37,7 +37,7 @@ public class Market {
 	private String name;
 	private HashSet<Order> orders = new HashSet<>();
 	private static HashSet<Admin> admins = new HashSet<>();
-	private static HashMap<String, User> users = new HashMap<>(); // zashto da sa static
+	private static HashMap<String, User> users = new HashMap<>();
 	private static HashMap<Product.TYPES, HashMap<Product, Integer>> products = new HashMap<>();
 	private static HashMap<Product, Integer> mostWanted = new HashMap<>();
 	Scanner scanner = new Scanner(System.in);
