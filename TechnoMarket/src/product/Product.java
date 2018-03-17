@@ -115,6 +115,8 @@ public class Product {
 	public void setRatings(ArrayList<Integer> ratings) {
 		this.ratings = ratings;
 	}
+	
+	
 
 
 

@@ -383,6 +383,12 @@ public class Market {
 		Market.subscribers.remove(customer);
 	}
 	
+	public void printRecentlyViewedProduct(Customer customer) {
+		customer.recentlyViewedProduct.stream()
+		.limit(5)
+		.forEach(x -> System.out.println(x.getModel() + " " + x.getPrice()));
+	}
+	
 	
 	
 	
