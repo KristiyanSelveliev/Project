@@ -83,8 +83,8 @@ public class Market {
 	public static Market getInstance() {
 		if (instance == null) {
 			instance = new Market();
-			generateAdmins(3);
-			generateCust(3);
+			generateAdmins(3);//TODO ne e neobhodimo, ima static block
+			generateCust(3);// -||-
 			products.put(TYPES.GSM, new HashMap());
 			products.put(TYPES.PC, new HashMap());
 			products.put(TYPES.TV, new HashMap());
@@ -279,8 +279,8 @@ public class Market {
 		System.out.println(list.toString());
 	}
 
-	public boolean validateProductType(String type) {
-		for (String s : this.types) {
+	public boolean validateProductType(TYPES type) {
+		for (TYPES s : Market.types) {
 			if (type.equals(s)) {
 				return true;
 			}
