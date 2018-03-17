@@ -51,6 +51,9 @@ public class Customer extends User{
 				cart.put(product, cart.get(product) + quantity);
 			}	
 		}
+		else {
+			System.out.println("Not enough quantity of this product!");
+		}
 			
 		
 	}	

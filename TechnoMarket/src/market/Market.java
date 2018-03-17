@@ -117,9 +117,7 @@ public class Market {
 						System.out.println("Enter a password: ");
 						String password = scanner.nextLine();
 						if (users.get(username).getPassword().equals(password)) {
-							//System.out.println(users.get(username).isLoginStatus());
-							users.get(username).setLoginStatus(true);
-							//System.out.println(users.get(username).isLoginStatus());
+							users.get(username).setLoginStatus(true);					
 							users.get(username).setLastLogin(LocalDateTime.now());
 							System.out.println("Successful login");
 							return;
@@ -282,8 +280,7 @@ public class Market {
 	public void removeProducts(HashMap<Product, Integer> products) {
 		for (Product product : products.keySet()) {
 			this.products.get(product.getType()).put(product,
-					this.products.get(product.getType()).get(product) - products.get(product));
-			// da se testva!!!
+					this.products.get(product.getType()).get(product) - products.get(product));			
 			if (!mostWanted.containsKey(product)) {
 				mostWanted.put(product, products.get(product));
 			} else {
@@ -299,8 +296,7 @@ public class Market {
 		list.sort((new Comparator<Entry<Product, Integer>>() {
 
 			@Override
-			public int compare(Entry<Product, Integer> o1, Entry<Product, Integer> o2) {
-				// TODO Auto-generated method stub
+			public int compare(Entry<Product, Integer> o1, Entry<Product, Integer> o2) {				
 				return o2.getValue() - o1.getValue();
 			}
 		}));
