@@ -28,19 +28,12 @@ public class Customer extends User{
 	@Override
 	public void login() {
 		super.login();
-		//TODO tozi metod da se iznese v Market
-		
+			
 	}
 
 	
 	public void register() {
 		this.getMarket().registrationRequest(this);
-		
-	}
-
-	@Override
-	public void search() {
-		
 		
 	}
 
@@ -121,18 +114,16 @@ public class Customer extends User{
 		
 	}
 
-	@Override
-	public void logout() {
-		super.logout();
-		//TODO da se iznese v Market tozi metod
-		
-	}
 	
 	public void subscribe() {
 		getMarket().subscribeUser(this);
 	}
 	
-	//TODO unsubscribe method
+	public void unsubscribe() {
+		getMarket().unsubscribe(this);
+	}
+	
+	
 	//TODO Recently Viewed Products
 	
 	

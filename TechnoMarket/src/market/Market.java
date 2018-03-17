@@ -354,6 +354,10 @@ public class Market {
 		Market.subscribers.add(customer);
 		
 	}
+
+	public void unsubscribe(Customer customer) {
+		Market.subscribers.remove(customer);
+	}
 	
 	
 	
