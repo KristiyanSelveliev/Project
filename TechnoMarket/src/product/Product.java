@@ -110,12 +110,6 @@ public class Product {
 			this.description = description;
 		}
 	}
-
-
-	public void setRatings(ArrayList<Integer> ratings) {
-		this.ratings = ratings;
-	}
-	
 	
 
 

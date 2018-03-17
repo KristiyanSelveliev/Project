@@ -2,6 +2,7 @@ package order;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 import product.Product;
 import user.User;
@@ -15,12 +16,14 @@ public class Order {
 	private HashMap<Product, Integer> listProduct = new HashMap<>();
 	private LocalDate date;
 	private String status;
+	private double totalSum;
 	
 	public Order(User user, HashMap<Product, Integer> list) {
 		this.user = user;
 		this.listProduct.putAll(list);
 		this.date = LocalDate.now();
 		this.id = CURRENT_ORDER++;
+		
 		
 	}
 	
@@ -41,6 +44,21 @@ public class Order {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<Product, Integer> e: this.listProduct.entrySet()) {
+			sb.append(e.getKey().getModel() + " ");
+			sb.append(e.getValue());
+			sb.append("\n");
+		}
+		
+		return "Order number # " + this.id + "\n" +
+		"Placed on: " + date + "\n" + 
+		sb.toString() + "\n" + 
+		this.totalSum;
 	}
 	
 	

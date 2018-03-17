@@ -141,7 +141,6 @@ public class Customer extends User{
 	}
 	
 	
-	//TODO Recently Viewed Products
 	
 	
 
