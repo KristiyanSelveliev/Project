@@ -30,36 +30,45 @@ import validator.Validator;
 public class Market {
 	
 	
-	
-	static {
+        public static void main(String[] args) {
+		
+		Market market = Market.getInstance();
 		
 		ArrayList<Customer> customersList = new ArrayList<>();
+		
 		Admin admin = new Admin("Admin", "Adminov", "admincho", "admin40@@", "admin@abv.bg");
-		ArrayList<Product> productsList = new ArrayList<>();
+		
+		 ArrayList<Product> productsList = new ArrayList<>();
 		
 		for (int i = 0; i < 10; i++) {
 			Product pro = new Product("product" + (i + 1), "name" + (i + 1), Validator.randomInt(50, 3000), Market.types[Validator.randomInt(0, Market.types.length)]);
 			productsList.add(pro);
 		}
-		
+	
 		for(int j = 0; j < 2; j++) {
 			Customer customer = new Customer("User" + (j + 1), "Petrov" + (j + 1), "usercho" + (j + 1), "user40@@@", "user@abv.bg");
 			customersList.add(customer);
 			Market.users.put(customer.getUsername(), customer);
 		}
 		
-		Market.admins.add(admin);
+	           Market.admins.add(admin);
 		for (Product product : productsList) {
 			if(!Market.products.containsKey(product.getType())) {
 				Market.products.put(product.getType(), new HashMap<>());
 			}
 			Market.products.get(product.getType()).put(product, Validator.randomInt(20,  50));
-		}
 		
 		
 		
-		
+		//market.getRandomAdmin();
+		//market.generateAdmins(10);
 	}
+	}
+	
+	
+	
+	
+	
 
 	public static final int MIN_RATING = 1;
 	public static final int MAX_RATING = 5;
@@ -330,6 +339,9 @@ public class Market {
 		Market.subscribers.add(customer);
 		
 	}
+	
+	
+	
 	
 	
 	
