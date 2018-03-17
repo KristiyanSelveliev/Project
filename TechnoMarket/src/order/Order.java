@@ -23,7 +23,9 @@ public class Order {
 		this.listProduct.putAll(list);
 		this.date = LocalDate.now();
 		this.id = CURRENT_ORDER++;
-		
+		for (Map.Entry<Product, Integer> e : list.entrySet()) {
+			this.totalSum += e.getKey().getPrice()*e.getValue();
+		}
 		
 	}
 	
