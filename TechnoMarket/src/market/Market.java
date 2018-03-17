@@ -91,9 +91,9 @@ public class Market {
 	public static Market getInstance() {
 		if (instance == null) {
 			instance = new Market();
-			generateAdmins(3);//TODO ne e neobhodimo, ima static block
+			/*generateAdmins(3);//TODO ne e neobhodimo, ima static block
 			generateCust(3);// -||-
-			products.put(TYPES.GSM, new HashMap());
+*/			products.put(TYPES.GSM, new HashMap());
 			products.put(TYPES.PC, new HashMap());
 			products.put(TYPES.TV, new HashMap());
 			
@@ -257,11 +257,7 @@ public class Market {
 	
 
 	public static Map<Product.TYPES, HashMap<Product, Integer>> getProducts() {
-		return products;
-	}
-
-	public static void setProducts(HashMap<Product.TYPES, HashMap<Product, Integer>> products) {
-		Market.products = products;
+		return Collections.unmodifiableMap(products);
 	}
 
 	public boolean checkQuantity(Product product, int quantity) {
@@ -342,7 +338,7 @@ public class Market {
 		}		
 	}
 	
-	public static Admin getRandomAdmin() {
+	/*public static Admin getRandomAdmin() {
 		ArrayList<Admin> xAdmins = new ArrayList<>();
 		xAdmins.addAll(admins);
 		return	xAdmins.get(new Random().nextInt(xAdmins.size()));
@@ -355,7 +351,7 @@ public class Market {
 		custList.addAll((Collection<? extends Customer>) xList);
 		return	custList.get(new Random().nextInt(custList.size()));
 		
-	}
+	}*/
 
 	public static HashSet<Admin> getAdmins() {
 		return (HashSet<Admin>) Collections.unmodifiableSet(admins);

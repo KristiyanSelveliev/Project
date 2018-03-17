@@ -1,6 +1,7 @@
 package user;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -17,9 +18,9 @@ public class Customer extends User{
 	private String address;
 	private String phone;
 	private LocalDate registrationDate;	
-	HashMap<Product, Integer> cart = new HashMap<>();
-	HashSet<Product> favoritesProduct = new HashSet<>();
-	HashSet<Order> orders = new HashSet<>();
+	private HashMap<Product, Integer> cart = new HashMap<>();
+	private HashSet<Product> favoritesProduct = new HashSet<>();
+	private HashSet<Order> orders = new HashSet<>();
 	public HashSet<Product> recentlyViewedProduct = new HashSet<>();
 	Scanner scanner = new Scanner(System.in);
 	
@@ -142,6 +143,18 @@ public class Customer extends User{
 	public void search() {
 		getMarket().search(this);
 	}
+
+
+	public HashSet<Product> getRecentlyViewedProduct() {
+		return recentlyViewedProduct;
+	}
+
+
+	public void setRecentlyViewedProduct(HashSet<Product> recentlyViewedProduct) {
+		this.recentlyViewedProduct = (HashSet<Product>) Collections.unmodifiableSet(recentlyViewedProduct);
+	}
+	
+	
 	
 	
 	
