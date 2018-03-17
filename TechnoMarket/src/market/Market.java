@@ -297,6 +297,21 @@ public class Market {
 		return false;
 	}
 	
+	public void logout(User user) {
+		try {
+		if(user.isLoginStatus()) {
+			user.setLoginStatus(false);
+			System.out.println("Successful logout");
+		}
+		else {
+			throw new LoginException("Invalid operation");
+		}
+		}
+		catch (LoginException e) {
+			e.getMessage();
+		} 
+	}
+	
 	
 	public static void generateAdmins(int a) {
 		for (int i = 0; i < a; i++) {

@@ -35,18 +35,7 @@ abstract public class User {
 		
 	}
 	public void logout() {
-		try {
-		if(this.isLoginStatus()) {
-			this.loginStatus = false;
-			System.out.println("Successful logout");
-		}
-		else {
-			throw new LoginException("Invalid operation");
-		}
-		}
-		catch (LoginException e) {
-			e.getMessage();
-		} 
+		market.logout(this);
 	}
 	
 	public void search() {
