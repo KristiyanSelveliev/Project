@@ -28,7 +28,7 @@ public class Customer extends User{
 	@Override
 	public void login() {
 		super.login();
-		//this.setLoginStatus(true);
+		//TODO tozi metod da se iznese v Market
 		
 	}
 
@@ -124,12 +124,15 @@ public class Customer extends User{
 	@Override
 	public void logout() {
 		super.logout();
+		//TODO da se iznese v Market tozi metod
 		
 	}
 	
 	public void subscribe() {
 		getMarket().subscribeUser(this);
 	}
+	
+	//TODO unsubscribe method
 	
 	
 
