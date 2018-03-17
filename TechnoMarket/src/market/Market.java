@@ -45,9 +45,11 @@ public class Market {
 			productsList.add(pro);
 		}
 	
-		for(int j = 0; j < 2; j++) {
+		for(int j = 0; j < 1; j++) {
 			Customer customer = new Customer("User" + (j + 1), "Petrov" + (j + 1), "usercho" + (j + 1), "user40@@@", "user@abv.bg");
 			customersList.add(customer);
+			customer.register();
+			customer.login();
 			Market.users.put(customer.getUsername(), customer);
 		}
 		
@@ -104,14 +106,11 @@ public class Market {
 
 	public void loginRequest(User user) {
 		int counter = MAX_LOGIN_REQUEST;
-		boolean invalidLogin = false;
-
+		while (counter > 0) {
+			System.out.println("Enter a username: ");
+			String username = scanner.nextLine();
+			counter--;
 		try {
-			while (counter > 0) {
-				System.out.println("Enter a username: ");
-				String username = scanner.nextLine();
-				counter--;
-
 				if (Validator.validUsername(username)) {
 					if (users.containsKey(username)) {
 						System.out.println("Enter a password: ");
@@ -121,31 +120,20 @@ public class Market {
 							users.get(username).setLastLogin(LocalDateTime.now());
 							System.out.println("Successful login");
 							return;
-						} else {
-							invalidLogin = true;
-							throw new LoginException("Invalid password. Try again.");
-						}
-					} else {
+						} 	
+							throw new LoginException("Invalid password. Try again.");	
+					} 
 						throw new LoginException("Not existing user! ");
-						// TODO registration
-					}
-
-				} else {
-					invalidLogin = true;
-					throw new LoginException(
-							"Invalid username. Username must be at least 4 characters, without spaces");
 				}
-
+				throw new LoginException("Invalid username. Username must be at least 4 characters, without spaces");	
 				
-			}
-
-			if (counter == 0) {
-				throw new LoginException(
-						"Sorry, you weren't able to login. Try again later. Max login attempts " + "exceeded");
-			}
 		} catch (LoginException e) {
 			System.out.println(e.getMessage());
 		}
+		if (counter == 0) {
+			System.out.println("Srry try again later");
+		  }
+	 }
 	}
 
 	public void registrationRequest(User user) {
@@ -178,22 +166,15 @@ public class Market {
 							this.users.put(username, customer);
 							System.out.println("Successful registration");
 							return;
-						} else {
+						} 
 							throw new InvalidFormatInput("Passwords not equal.");
-
-						}
-					} else {
+					} 
 						throw new InvalidFormatInput("Invalid email");
-
-					}
-
-				} else {
-					throw new InvalidFormatInput("The username is already taken. Choose another username.");
-
-				}
-			} else {
+				} 
+					throw new InvalidFormatInput("The username is already taken. Choose another username.");	
+			} 
 				throw new InvalidFormatInput("Enter a valid username - al least 4 characters, without spaces.");
-			}
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("Unsuccessful registration. Do you want to try again? Y/N");
