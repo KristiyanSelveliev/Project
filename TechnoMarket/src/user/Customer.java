@@ -17,6 +17,7 @@ public class Customer extends User{
 	HashMap<Product, Integer> cart = new HashMap<>();
 	HashSet<Product> favoritesProduct = new HashSet<>();
 	HashSet<Order> orders = new HashSet<>();
+	public HashSet<Product> recentlyViewedProduct = new HashSet<>();
 	Scanner scanner = new Scanner(System.in);
 	
 	public Customer(String name, String lastName, String username, String password, String email) {
@@ -121,6 +122,16 @@ public class Customer extends User{
 	
 	public void unsubscribe() {
 		getMarket().unsubscribe(this);
+	}
+
+
+	@Override
+	public boolean isAdmin() {
+		return false;
+	}
+	
+	public void search() {
+		getMarket().search(this);
 	}
 	
 	

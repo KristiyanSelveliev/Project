@@ -4,6 +4,8 @@ package user;
 
 import java.util.HashMap;
 
+import javax.naming.directory.SearchControls;
+
 import myExceptions.InvalidFormatInput;
 import product.Product;
 import product.Product.TYPES;
@@ -21,19 +23,14 @@ public class Admin extends User{
 
 
 	@Override	
-	public void login() {
-		
-		super.login();
-		
+	public void login() {		
+		super.login();		
 	}
 
-
-
-	@Override	
 	public void search() {
-		super.search();
-		
+		getMarket().search(this);
 	}
+
 
 	@Override
 	public void addProduct(Product product, int quantity) {
@@ -125,6 +122,13 @@ public class Admin extends User{
 	public void logout() {
 		super.logout();
 		
+	}
+
+
+
+	@Override
+	public boolean isAdmin() {
+		return true;
 	}
 	
 	

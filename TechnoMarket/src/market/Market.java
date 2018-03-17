@@ -208,7 +208,29 @@ public class Market {
 
 	}
 
-	public void search() {
+	public void search(Admin admin) {
+		try {
+			String product = scanner.nextLine();
+			if (Validator.validateString(product)) {
+				throw new InvalidFormatInput("Product not found. Try again");
+			}
+			HashSet<Product> searchedProducts = new HashSet<>();
+			for (Map.Entry<Product.TYPES, HashMap<Product, Integer>> key : products.entrySet()) {
+				for (Product pr : key.getValue().keySet()) {
+					if (pr.getModel().contains(product)) {
+						searchedProducts.add(pr);		
+					}
+				}
+			}
+			
+			System.out.println(searchedProducts);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	
+	public void search(Customer customer) {
 		try {
 			String product = scanner.nextLine();
 			if (Validator.validateString(product)) {
@@ -219,9 +241,11 @@ public class Market {
 				for (Product pr : key.getValue().keySet()) {
 					if (pr.getModel().contains(product)) {
 						searchedProducts.add(pr);
+						customer.recentlyViewedProduct.add(pr);
 					}
 				}
 			}
+			
 			System.out.println(searchedProducts);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

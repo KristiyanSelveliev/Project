@@ -37,11 +37,7 @@ abstract public class User {
 	public void logout() {
 		market.logout(this);
 	}
-	
-	public void search() {
-		market.search();
-		
-	}
+
 	
 	public void changePassword(String password) {
 		try {
@@ -57,8 +53,9 @@ abstract public class User {
 		}
 	}
 	
-	abstract protected void addProduct(Product product, int quantity);
-	abstract protected void removeProduct(Product product);
+	abstract public void addProduct(Product product, int quantity);
+	abstract public void removeProduct(Product product);
+	abstract public boolean isAdmin();
 	
 	
 	public boolean isLoginStatus() {
