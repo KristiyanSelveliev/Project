@@ -85,8 +85,7 @@ public class Market {
 	Scanner scanner = new Scanner(System.in);
 
 	private Market() {
-		
-		// TODO da go pogledna posle
+		this.name = "TechnoMarket";
 	}
 
 	public static Market getInstance() {
@@ -257,10 +256,7 @@ public class Market {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-		//TODO validation
-	}
+	
 
 	public static Map<Product.TYPES, HashMap<Product, Integer>> getProducts() {
 		return products;

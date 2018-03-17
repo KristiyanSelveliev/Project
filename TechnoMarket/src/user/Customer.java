@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+
+import myExceptions.LoginException;
+
 import java.util.HashMap;
 
 import order.Order;
@@ -68,20 +71,23 @@ public class Customer extends User{
 	}
 	
 	public void finishOrder() {
-		//proba
-		if(this.isLoginStatus()) {
-			Order order = new Order(this, cart);
-			orders.add(order);
-			getMarket().removeProducts(this.cart);
-			this.cart.clear();
-			System.out.println("Please enter delivery address: ");
-			this.address = scanner.nextLine();
-			System.out.println("Your order is finished");
-			
+		try {
+			if(this.isLoginStatus()) {
+				Order order = new Order(this, cart);
+				orders.add(order);
+				getMarket().removeProducts(this.cart);
+				this.cart.clear();
+				System.out.println("Please enter delivery address: ");
+				this.address = scanner.nextLine();
+				System.out.println("Your order is finished");
+				
+			}
+			else {
+				throw new LoginException("Please log in");
+			}			
 		}
-		else {
-			System.out.println("Please log in");
-			//TODO exception
+		catch (LoginException e) {
+			System.out.println(e.getMessage());
 		}
 		
 	}
