@@ -133,6 +133,7 @@ public class Customer extends User{
 	}
 	
 	//TODO unsubscribe method
+	//TODO Recently Viewed Products
 	
 	
 
