@@ -3,7 +3,7 @@
 =====Technomaket=====<br />
 
 functionalities:<br />
-{
+{<br />
 abstract User: <br />
 
 -Login <br />
@@ -19,7 +19,7 @@ Customer:<br />
 -add products to shopping cart  <br />
 -remove products from shopping cart <br />
 -adding product to favorites <br />
-- order(buying the products that are in his shopping cart) <br />
+-order(buying the products that are in his shopping cart) <br />
 -logout <br />
 -search for a product in market <br />
 <br />
