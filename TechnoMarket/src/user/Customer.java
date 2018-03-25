@@ -17,7 +17,7 @@ public class Customer extends User{
 	
 	private String address;
 	private String phone;
-	private LocalDate registrationDate;	
+		
 	private HashMap<Product, Integer> cart = new HashMap<>();
 	private HashSet<Product> favoritesProduct = new HashSet<>();
 	private HashSet<Order> orders = new HashSet<>();

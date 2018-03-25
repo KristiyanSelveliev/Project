@@ -18,6 +18,8 @@ abstract public class User {
 	private String password;
 	private String email;
 	private LocalDateTime lastLogin;
+	protected LocalDate registrationDate;	
+
 	private Market market = Market.getInstance();
 	private boolean loginStatus;
 	
