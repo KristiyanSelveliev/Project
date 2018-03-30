@@ -33,8 +33,7 @@ public class CustomerDAO implements IUserDAO{
 		pStatement.setString(3, customer.getUsername());
 		pStatement.setString(4, customer.getPassword());
 		pStatement.setString(5, customer.getEmail());
-		pStatement.executeUpdate();
-		
+		pStatement.executeUpdate();		
 	}
 	
 	
