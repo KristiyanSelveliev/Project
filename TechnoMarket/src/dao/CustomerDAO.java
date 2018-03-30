@@ -2,9 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.imageio.spi.RegisterableService;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import controller.DBManager;
 import model.Customer;
@@ -13,6 +15,7 @@ import model.Product;
 public class CustomerDAO implements IUserDAO{
 	
 	private static CustomerDAO instance;
+	private static Connection connection;
 	
 	public static synchronized CustomerDAO getInstance(){
 		if(instance == null) {
@@ -22,11 +25,10 @@ public class CustomerDAO implements IUserDAO{
 	}
 	
 	private CustomerDAO() {
-		// TODO Auto-generated constructor stub
+		connection = DBManager.getInstance().getConnection();
 	}
 	
 	public void addUser(Customer customer) throws SQLException{
-		Connection connection = DBManager.getInstance().getConnection();
 		PreparedStatement pStatement = connection.prepareStatement("INSERT INTO users (name, lastName, username, password, email) VALUES (?,?,?,?,?)");
 		pStatement.setString(1, customer.getName());
 		pStatement.setString(2, customer.getLastName());
@@ -34,6 +36,17 @@ public class CustomerDAO implements IUserDAO{
 		pStatement.setString(4, customer.getPassword());
 		pStatement.setString(5, customer.getEmail());
 		pStatement.executeUpdate();		
+	}
+	
+	public boolean checkUsernameAndPass(String username, String password) throws SQLException{ // ??? exception-a
+		PreparedStatement pStatement = connection.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?");
+		pStatement.setString(1, username);
+		pStatement.setString(2, password);
+		ResultSet resultSet = pStatement.executeQuery();
+		if(resultSet.getInt(1) == 1 ) {
+			return true;
+		}
+		return false;			
 	}
 	
 	
