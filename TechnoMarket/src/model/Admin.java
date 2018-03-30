@@ -1,4 +1,4 @@
-package user;
+package model;
 
 
 
@@ -7,8 +7,6 @@ import java.util.HashMap;
 import javax.naming.directory.SearchControls;
 
 import myExceptions.InvalidFormatInput;
-import product.Product;
-import product.Product.TYPES;
 import validator.Validator;
 
 public class Admin extends User{

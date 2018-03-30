@@ -12,18 +12,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import model.Admin;
+import model.Customer;
+import model.Order;
+import model.Product;
+import model.User;
+import model.Product.TYPES;
+
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 import myExceptions.InvalidFormatInput;
 import myExceptions.LoginException;
-import order.Order;
-import product.Product;
-import product.Product.TYPES;
-import user.Admin;
-import user.Customer;
-import user.User;
 import validator.Validator;
 
 

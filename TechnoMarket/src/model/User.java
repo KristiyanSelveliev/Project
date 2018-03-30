@@ -1,4 +1,4 @@
-package user;
+package model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,16 +7,18 @@ import java.util.Scanner;
 import market.Market;
 import myExceptions.InvalidFormatInput;
 import myExceptions.LoginException;
-import product.Product;
 import validator.Validator;
 
 abstract public class User {
+	
 	
 	private String name;
 	private String lastName;
 	private String username;
 	private String password;
 	private String email;
+	private String address;
+	private String phone;
 	private LocalDateTime lastLogin;
 	protected LocalDate registrationDate;	
 
@@ -30,6 +32,8 @@ abstract public class User {
 		this.password = password;
 		this.email = email;
 	}
+	
+	
 
 	
 	public void login() {
@@ -144,6 +148,16 @@ abstract public class User {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

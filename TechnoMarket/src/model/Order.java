@@ -1,11 +1,8 @@
-package order;
+package model;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-
-import product.Product;
-import user.User;
 
 public class Order {
 	
@@ -13,7 +10,7 @@ public class Order {
 	private static int CURRENT_ORDER = 0;
 	private int id;
 	private User user;
-	private HashMap<Product, Integer> listProduct = new HashMap<>();
+	private HashMap<Product, Integer> listProduct = new HashMap<>(); 
 	private LocalDate date;
 	private String status;
 	private double totalSum;

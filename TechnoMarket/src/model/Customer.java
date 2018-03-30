@@ -1,4 +1,4 @@
-package user;
+package model;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -10,13 +10,9 @@ import myExceptions.LoginException;
 
 import java.util.HashMap;
 
-import order.Order;
-import product.Product;
-
 public class Customer extends User{
 	
-	private String address;
-	private String phone;
+	
 		
 	private HashMap<Product, Integer> cart = new HashMap<>();
 	private HashSet<Product> favoritesProduct = new HashSet<>();
@@ -82,7 +78,7 @@ public class Customer extends User{
 				getMarket().removeProducts(this.cart);
 				this.cart.clear();
 				System.out.println("Please enter delivery address: ");
-				this.address = scanner.nextLine();
+				this.setAddress(scanner.nextLine());
 				System.out.println("Your order is finished");
 				
 			}

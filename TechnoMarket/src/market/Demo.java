@@ -2,10 +2,10 @@ package market;
 
 import java.util.HashSet;
 
-import product.Product;
-import product.Product.TYPES;
-import user.Admin;
-import user.Customer;
+import model.Admin;
+import model.Customer;
+import model.Product;
+import model.Product.TYPES;
 
 public class Demo {
 	
