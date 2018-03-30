@@ -1,6 +1,6 @@
 package dao;
 
-public class UserDAO {
+public class UserDAO implements IUserDAO {
 	
 	private static UserDAO instance;
 	
