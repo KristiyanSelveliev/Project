@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -69,6 +70,7 @@ public class UserManager {
 					users.get(username).setLoginStatus(true);					
 					users.get(username).setLastLogin(LocalDateTime.now());
 					System.out.println("Successful login");
+					CustomerDAO.getInstance().login(username, password);
 					return;
 				}
 				throw new InvalidFormatInput("Not existing user!");
@@ -77,7 +79,29 @@ public class UserManager {
 			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void logout(String username, String password)  {
+		try {
+			CustomerDAO.getInstance().logout(username, password);
+		} catch (SQLException e) {
+			System.out.println("Invalid operation" + e.getMessage());
 		}	
+		
+	}
+	
+	public void changePassword(String username, String password) {
+		try {
+			CustomerDAO.getInstance().changePassword(username, password);
+		}catch (SQLException e) {
+			System.out.println("Invalid operation" + e.getMessage());
+		}
+	}
+	
+	public void search(String product) {
+		
 		
 	}
 

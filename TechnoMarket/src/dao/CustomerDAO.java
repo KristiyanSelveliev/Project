@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.imageio.spi.RegisterableService;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import controller.DBManager;
 import model.Customer;
@@ -29,12 +27,13 @@ public class CustomerDAO implements IUserDAO{
 	}
 	
 	public void addUser(Customer customer) throws SQLException{
-		PreparedStatement pStatement = connection.prepareStatement("INSERT INTO users (name, lastName, username, password, email) VALUES (?,?,?,?,?)");
+		PreparedStatement pStatement = connection.prepareStatement("INSERT INTO users (name, lastName, username, password, email, loginStatus) VALUES (?,?,?,?,?,?)");
 		pStatement.setString(1, customer.getName());
 		pStatement.setString(2, customer.getLastName());
 		pStatement.setString(3, customer.getUsername());
 		pStatement.setString(4, customer.getPassword());
 		pStatement.setString(5, customer.getEmail());
+		pStatement.setBoolean(6, true);
 		pStatement.executeUpdate();		
 	}
 	
@@ -52,20 +51,27 @@ public class CustomerDAO implements IUserDAO{
 	
 
 	@Override
-	public void login() {
-		// TODO Auto-generated method stub
+	public void login(String username, String password) throws SQLException{
+		if(this.checkUsernameAndPass(username, password)) {
+			PreparedStatement pStatement = connection.prepareStatement("UPDATE users SET loginStatus = "+1+" WHERE username = "+username+" ");
+			pStatement.executeUpdate();
+		}
+		
 		
 	}
 
 	@Override
-	public void logout() {
-		// TODO Auto-generated method stub
-		
+	public void logout(String username, String password) throws SQLException{
+			PreparedStatement pStatement = connection.prepareStatement("UPDATE users SET loginStatus = "+0+" WHERE username = "+username+" ");
+			pStatement.executeUpdate();		
 	}
 
 	@Override
-	public void changePassword() {
-		// TODO Auto-generated method stub
+	public void changePassword(String username, String password) throws SQLException {
+		if(this.checkUsernameAndPass(username, password)) {
+			PreparedStatement pStatement = connection.prepareStatement("UPDATE users SET password = "+password+" WHERE username = "+username+" ");
+			pStatement.executeUpdate();
+		}
 		
 	}
 
