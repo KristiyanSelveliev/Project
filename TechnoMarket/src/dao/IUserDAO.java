@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.SQLException;
+
 
 import model.Product;
 

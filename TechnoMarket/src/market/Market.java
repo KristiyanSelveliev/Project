@@ -165,7 +165,7 @@ public class Market {
 						String password1 = scanner.nextLine();
 						if (password.equals(password1)) {
 							Customer customer = new Customer(name, lastName, username, password, email);
-							this.users.put(username, customer);
+							users.put(username, customer);
 							System.out.println("Successful registration");
 							return;
 						} 
