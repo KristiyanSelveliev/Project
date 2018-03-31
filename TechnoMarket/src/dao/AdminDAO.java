@@ -20,19 +20,19 @@ public class AdminDAO implements IUserDAO{
 	}
 
 	@Override
-	public void login() {
+	public void login(String username, String password) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void logout() throws SQLException{
+	public void logout(String username, String password) throws SQLException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void changePassword() throws SQLException{
+	public void changePassword(String username, String password) throws SQLException{
 		// TODO Auto-generated method stub
 		
 	}
