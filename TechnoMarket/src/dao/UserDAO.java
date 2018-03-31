@@ -10,19 +10,19 @@ import controller.DBManager;
 import model.Customer;
 import model.Product;
 
-public class CustomerDAO implements IUserDAO{
+public class UserDAO implements IUserDAO{
 	
-	private static CustomerDAO instance;
+	private static UserDAO instance;
 	private static Connection connection;
 	
-	public static synchronized CustomerDAO getInstance(){
+	public static synchronized UserDAO getInstance(){
 		if(instance == null) {
-			instance = new CustomerDAO();
+			instance = new UserDAO();
 		}
 		return instance;
 	}
 	
-	private CustomerDAO() {
+	private UserDAO() {
 		connection = DBManager.getInstance().getConnection();
 	}
 	
@@ -76,13 +76,61 @@ public class CustomerDAO implements IUserDAO{
 	}
 
 	@Override
-	public void addProduct(Product product, int quantity) {
+	public void addProductAdmin(Product product, int quantity) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removeProduct(Product product) {
+	public void addProductCustomer(Product product, int quantity) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void searchProduct() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeProductAdmin(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeProductCustomer(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProductAdmin(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createProductAdmin(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rateProduct(Product product, int rating) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addToFavorite(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finishOrder() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -93,4 +141,6 @@ public class CustomerDAO implements IUserDAO{
 		return false;
 	}
 
+	
+	
 }
