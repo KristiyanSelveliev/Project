@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-import dao.CustomerDAO;
+import dao.UserDAO;
 import model.Customer;
 import model.User;
 import myExceptions.InvalidFormatInput;
@@ -35,8 +35,8 @@ public class UserManager {
 			
 			if(Validator.validUsername(username) && Validator.validateString(name)&& Validator.validPassword(password) &&
 					Validator.validateString(lastName) && Validator.validEMail(email)) {
-				if(!CustomerDAO.getInstance().checkUsernameAndPass(username, password)) {
-					CustomerDAO.getInstance().addUser(customer);
+				if(!UserDAO.getInstance().checkUsernameAndPass(username, password)) {
+					UserDAO.getInstance().addUser(customer);
 					return;
 				}
 				throw new InvalidFormatInput("The username is already taken. Choose another username.");				
@@ -66,11 +66,11 @@ public class UserManager {
 		// TODO add max_login_request
 		try {
 			if(Validator.validUsername(username) && Validator.validPassword(password)) {
-				if(CustomerDAO.getInstance().checkUsernameAndPass(username, password)) {
+				if(UserDAO.getInstance().checkUsernameAndPass(username, password)) {
 					users.get(username).setLoginStatus(true);					
 					users.get(username).setLastLogin(LocalDateTime.now());
 					System.out.println("Successful login");
-					CustomerDAO.getInstance().login(username, password);
+					UserDAO.getInstance().login(username, password);
 					return;
 				}
 				throw new InvalidFormatInput("Not existing user!");
@@ -85,7 +85,7 @@ public class UserManager {
 	
 	public void logout(String username, String password)  {
 		try {
-			CustomerDAO.getInstance().logout(username, password);
+			UserDAO.getInstance().logout(username, password);
 		} catch (SQLException e) {
 			System.out.println("Invalid operation" + e.getMessage());
 		}	
@@ -94,7 +94,7 @@ public class UserManager {
 	
 	public void changePassword(String username, String password) {
 		try {
-			CustomerDAO.getInstance().changePassword(username, password);
+			UserDAO.getInstance().changePassword(username, password);
 		}catch (SQLException e) {
 			System.out.println("Invalid operation" + e.getMessage());
 		}

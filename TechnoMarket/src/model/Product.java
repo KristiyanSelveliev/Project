@@ -6,6 +6,7 @@ import market.Market;
 import validator.Validator;
 
 public class Product {
+	
 	public enum TYPES {
 		PC, GSM, TV
 	}
