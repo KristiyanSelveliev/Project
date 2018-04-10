@@ -12,6 +12,7 @@ public class UserPojo {
 	private String username;
 	private String password;
 	private String email;
+	private int id;
 	private LocalDateTime lastLogin;
 	protected LocalDate registrationDate;	
 	private boolean loginStatus;
@@ -114,6 +115,11 @@ public class UserPojo {
 	public HashMap<Product, Integer> getCart() {
 		return cart;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
 
 	
 	

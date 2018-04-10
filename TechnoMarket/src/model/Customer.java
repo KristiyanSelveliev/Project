@@ -73,7 +73,7 @@ public class Customer extends User{
 	public void finishOrder() {
 		try {
 			if(this.isLoginStatus()) {
-				Order order = new Order(this, cart);
+				Order order = null;
 				orders.add(order);
 				getMarket().removeProducts(this.cart);
 				this.cart.clear();

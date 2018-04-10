@@ -9,13 +9,13 @@ public class Order {
 	
 	private static int CURRENT_ORDER = 0;
 	private int id;
-	private User user;
+	private UserPojo user;
 	private HashMap<Product, Integer> listProduct = new HashMap<>(); 
 	private LocalDate date;
 	private String status;
 	private double totalSum;
 	
-	public Order(User user, HashMap<Product, Integer> list) {
+	public Order(UserPojo user, HashMap<Product, Integer> list) {
 		this.user = user;
 		this.listProduct.putAll(list);
 		this.date = LocalDate.now();
@@ -31,7 +31,7 @@ public class Order {
 	public int getId() {
 		return id;
 	}
-	public User getUser() {
+	public UserPojo getUser() {
 		return user;
 	}
 	
@@ -43,6 +43,10 @@ public class Order {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public double getTotalSum() {
+		return totalSum;
 	}
 	
 	@Override

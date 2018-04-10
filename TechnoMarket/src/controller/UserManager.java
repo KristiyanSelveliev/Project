@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import dao.OrderDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
 import market.Market;
 import model.Customer;
+import model.Order;
 import model.Product;
 import model.User;
 import model.UserPojo;
@@ -163,6 +165,15 @@ public class UserManager {
 			System.out.println("Please log in");
 		}
 			
+	}
+	
+	void finishOrder(UserPojo user) {
+		if(user.isLoginStatus()) {
+			Order order = new Order(user, user.getCart());
+			//OrderDAO.getInstance().addOrder(order);
+			//TODO da se dovyrshi
+			
+		}
 	}
 	
 	
