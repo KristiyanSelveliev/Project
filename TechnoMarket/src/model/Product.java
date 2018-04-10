@@ -112,6 +112,14 @@ public class Product {
 		}
 	}
 	
+	public void setRatings(ArrayList<Integer> ratings) {
+		this.ratings = ratings;
+	}
+	
+	public ArrayList<Integer> getRatings() {
+		return ratings;
+	}
+	
 
 
 

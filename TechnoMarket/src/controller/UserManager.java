@@ -1,11 +1,16 @@
 package controller;
 
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 
+import dao.ProductDAO;
 import dao.UserDAO;
+import market.Market;
 import model.Customer;
+import model.Product;
 import model.User;
 import model.UserPojo;
 import myExceptions.InvalidFormatInput;
@@ -15,6 +20,7 @@ public class UserManager {
 	
 	private static UserManager instance;
 	private static HashMap<String, User> users = new HashMap<>();
+	ProductManager productManager= ProductManager.getInstance();
 
 	
 	public synchronized static UserManager getInstance() {
@@ -103,8 +109,62 @@ public class UserManager {
 	}
 	
 	public void search(String product) {
+		HashSet<String> products;
+		try {
+			products = UserDAO.getInstance().searchProduct(product);
+			
+		
+		}catch (SQLException e) {
+			System.out.println("This product is not found");
+		}
+		//TODO da se opravi
+		
 		
 		
 	}
+	
+	public void removeProduct(UserPojo user, Product product) {
+		if(user.getCart().containsKey(product)) {
+			user.getCart().remove(product);
+		}
+	}
+	
+	public void addProduct(UserPojo user, Product product, int quantity) {
+		if(quantity > 0 && product != null) {
+			user.getCart().put(product, user.getCart().get(product) + quantity);
+		}
+	}
+	
+	public void rateProduct(UserPojo user, Product product, int rating) {
+		if(user.isLoginStatus()) {
+			try {
+				ProductDAO.getInstance().changeRating(product, rating);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}    
+			
+		}
+		else {
+			System.out.println("please log in");
+		}
+			
+		
+	}
+	
+	public void addToFavorites(UserPojo user, Product product) {
+		if(user.isLoginStatus()) {
+			try {
+				UserDAO.getInstance().addToFavorite(user, product);
+			} catch (SQLException e) {
+				System.out.println("Invalid operation");
+			}			
+		}
+		else {
+			System.out.println("Please log in");
+		}
+			
+	}
+	
+	
 
 }

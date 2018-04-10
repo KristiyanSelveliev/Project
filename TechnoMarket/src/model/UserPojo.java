@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class UserPojo {
 	
@@ -14,10 +15,11 @@ public class UserPojo {
 	private LocalDateTime lastLogin;
 	protected LocalDate registrationDate;	
 	private boolean loginStatus;
+	private HashMap<Product, Integer> cart = new HashMap<>();
 	
 	public UserPojo(String name, String lastName, String username, String password, String email,
 			 LocalDateTime lastLogin, LocalDate registrationDate, boolean loginStatus) {
-		super();
+		this(name, lastName, username, password, email);
 		this.name = name;
 		this.lastName = lastName;
 		this.username = username;
@@ -30,7 +32,6 @@ public class UserPojo {
 	}
 	
 	public UserPojo(String name, String lastName, String username, String password, String email) {
-		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.username = username;
@@ -105,6 +106,15 @@ public class UserPojo {
 	public void setLoginStatus(boolean loginStatus) {
 		this.loginStatus = loginStatus;
 	}
+	
+	public void setCart(HashMap<Product, Integer> cart) {
+		this.cart = cart;
+	}
+	
+	public HashMap<Product, Integer> getCart() {
+		return cart;
+	}
+
 	
 	
 	
