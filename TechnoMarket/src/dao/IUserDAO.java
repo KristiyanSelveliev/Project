@@ -3,8 +3,16 @@ package dao;
 
 
 import model.Product;
+import model.UserPojo;
 
 public interface IUserDAO {
+	
+	
+	 void addUser(UserPojo user) throws Exception;
+	 
+	 boolean checkUsernameAndPass(String username,String password) throws Exception;
+	
+	 void deleteUser(String username);
 	
 	 boolean login(String name, String password) throws Exception;
 	

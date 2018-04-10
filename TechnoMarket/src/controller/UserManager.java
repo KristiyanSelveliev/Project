@@ -7,6 +7,7 @@ import java.util.HashMap;
 import dao.UserDAO;
 import model.Customer;
 import model.User;
+import model.UserPojo;
 import myExceptions.InvalidFormatInput;
 import validator.Validator;
 
@@ -30,13 +31,14 @@ public class UserManager {
 	}
 	
 	public void register(String name, String lastName, String username, String password, String email) {
-		Customer customer = new Customer(name, lastName, username, password, email);
+		//Customer customer = new Customer(name, lastName, username, password, email);
+		UserPojo user=new UserPojo(name,lastName,username,password,email);
 		try {			
 			
 			if(Validator.validUsername(username) && Validator.validateString(name)&& Validator.validPassword(password) &&
 					Validator.validateString(lastName) && Validator.validEMail(email)) {
 				if(!UserDAO.getInstance().checkUsernameAndPass(username, password)) {
-					UserDAO.getInstance().addUser(customer);
+					UserDAO.getInstance().addUser(user);
 					return;
 				}
 				throw new InvalidFormatInput("The username is already taken. Choose another username.");				

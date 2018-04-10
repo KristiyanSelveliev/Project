@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import controller.DBManager;
 import model.Customer;
 import model.Product;
+import model.UserPojo;
 
 public class UserDAO implements IUserDAO {
 
@@ -24,19 +25,22 @@ public class UserDAO implements IUserDAO {
 	private UserDAO() {
 		connection = DBManager.getInstance().getConnection();
 	}
-
-	public void addUser(Customer customer) throws SQLException {
+	
+	
+	
+	@Override
+	public void addUser(UserPojo user) throws SQLException  {
 		PreparedStatement pStatement = connection.prepareStatement(
 				"INSERT INTO users (name, lastName, username, password, email, loginStatus) VALUES (?,?,?,?,?,?)");
-		pStatement.setString(1, customer.getName());
-		pStatement.setString(2, customer.getLastName());
-		pStatement.setString(3, customer.getUsername());
-		pStatement.setString(4, customer.getPassword());
-		pStatement.setString(5, customer.getEmail());
+		pStatement.setString(1, user.getName());
+		pStatement.setString(2, user.getLastName());
+		pStatement.setString(3, user.getUsername());
+		pStatement.setString(4, user.getPassword());
+		pStatement.setString(5, user.getEmail());
 		pStatement.setBoolean(6, true);
 		pStatement.executeUpdate();
 	}
-
+	@Override
 	public boolean checkUsernameAndPass(String username, String password) throws SQLException { // ??? exception-a
 		PreparedStatement pStatement = connection
 				.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?");
@@ -48,7 +52,23 @@ public class UserDAO implements IUserDAO {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public void deleteUser(String username) {
+		try {
+			PreparedStatement ps=connection.prepareStatement("DELETE FROM users WHERE username=?");
+			ps.setString(1, username);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
 	@Override
 	public boolean login(String username, String password) throws SQLException {
 		if (this.checkUsernameAndPass(username, password)) {

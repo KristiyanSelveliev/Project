@@ -9,7 +9,7 @@ import myExceptions.InvalidFormatInput;
 import myExceptions.LoginException;
 import validator.Validator;
 
-abstract public class User {
+ public abstract class User {
 	
 	
 	private String name;
