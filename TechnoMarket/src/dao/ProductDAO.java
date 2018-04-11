@@ -34,6 +34,11 @@ private static Connection connection;
 		}		
 	}
 	
+	public int returnIdDB(Product product) {
+		//TODO must fill
+		return 0;
+	}
+	
     
 
 }

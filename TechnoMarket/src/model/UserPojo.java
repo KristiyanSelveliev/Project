@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import dao.UserDAO;
+
 public class UserPojo {
 	
 	
@@ -117,7 +119,7 @@ public class UserPojo {
 	}
 	
 	public int getId() {
-		return id;
+		return UserDAO.getInstance().returnId(this);
 	}
 	
 

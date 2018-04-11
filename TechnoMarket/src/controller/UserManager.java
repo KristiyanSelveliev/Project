@@ -170,8 +170,13 @@ public class UserManager {
 	void finishOrder(UserPojo user) {
 		if(user.isLoginStatus()) {
 			Order order = new Order(user, user.getCart());
-			//OrderDAO.getInstance().addOrder(order);
-			//TODO da se dovyrshi
+			try {
+				OrderDAO.getInstance().addOrder(order);
+				OrderManager.getInstance().removeProductsFromCart(order);
+			} catch (SQLException e) {
+				System.out.println("Something went wrong. Please try again " + e.getMessage());
+			}
+			
 			
 		}
 	}

@@ -190,6 +190,22 @@ public class UserDAO implements IUserDAO {
 		s.close();
 
 	}
+	
+	public int returnId(UserPojo user) {
+		String sql = "SELECT user_id FROM users WHERE username = "+user.getUsername()+"";
+		int id = 0;
+		try (PreparedStatement pStatement = connection.prepareStatement(sql);){
+			ResultSet resultSet = pStatement.executeQuery();
+			id = resultSet.getInt("user_id");
+			
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return id;
+		
+	}
+	
+	
 
 	@Override
 	public void finishOrder() throws Exception {

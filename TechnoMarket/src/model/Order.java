@@ -8,7 +8,7 @@ public class Order {
 	
 	
 	private static int CURRENT_ORDER = 0;
-	private int id;
+	private int id_number;
 	private UserPojo user;
 	private HashMap<Product, Integer> listProduct = new HashMap<>(); 
 	private LocalDate date;
@@ -19,7 +19,7 @@ public class Order {
 		this.user = user;
 		this.listProduct.putAll(list);
 		this.date = LocalDate.now();
-		this.id = CURRENT_ORDER++;
+		this.id_number = CURRENT_ORDER++;
 		for (Map.Entry<Product, Integer> e : list.entrySet()) {
 			this.totalSum += e.getKey().getPrice()*e.getValue();
 		}
@@ -28,8 +28,9 @@ public class Order {
 	
 	
 	
+	
 	public int getId() {
-		return id;
+		return id_number;
 	}
 	public UserPojo getUser() {
 		return user;
@@ -49,6 +50,14 @@ public class Order {
 		return totalSum;
 	}
 	
+	public HashMap<Product, Integer> getListProduct() {
+		return listProduct;
+	}
+	
+	public void setListProduct(HashMap<Product, Integer> listProduct) {
+		this.listProduct = listProduct;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -58,7 +67,7 @@ public class Order {
 			sb.append("\n");
 		}
 		
-		return "Order number # " + this.id + "\n" +
+		return "Order number # " + this.id_number + "\n" +
 		"Placed on: " + date + "\n" + 
 		sb.toString() + "\n" + 
 		this.totalSum;
