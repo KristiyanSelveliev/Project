@@ -119,19 +119,14 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public void changePassword(String username, String password) throws SQLException {
-		if (this.checkUsernameAndPass(username, password)) {
-			try (PreparedStatement pStatement = connection
+	public void changePassword(String username, String password) throws SQLException {		
+		try (PreparedStatement pStatement = connection
 					.prepareStatement("UPDATE users SET password = ? WHERE username = ? ");){
 				pStatement.setString(1, password);
 				pStatement.setString(2, username);
 				pStatement.executeUpdate();
 				
-			}		
-			
-			
-		}
-
+		}	
 	}
 
 	
@@ -209,7 +204,7 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public void finishOrder() throws Exception {
-		// TODO Auto-generated method stub
+		// TODO tozi metod trqbva da se mahne ? 
 
 	}
 
