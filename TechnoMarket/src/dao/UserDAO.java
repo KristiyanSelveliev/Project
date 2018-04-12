@@ -96,35 +96,9 @@ public class UserDAO implements IUserDAO {
 		
 	}
 	
-	public boolean returnLoginStatus(UserPojo user) {
-		String sql = "SELECT login_status FROM users WHERE username = "+user.getUsername()+"";
-		ResultSet result = null;
-		boolean status = false;
-	
-		try (PreparedStatement pStatement = connection.prepareStatement(sql);){
-			result = pStatement.executeQuery();
-			status = result.getBoolean("login_status");			
-			
-		}catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return status;
 
-	}
 	
 	
-	
-	
-	@Override
-	public void logout(String username, String password) throws SQLException {
-		try (PreparedStatement pStatement = connection
-				.prepareStatement("UPDATE users SET loginStatus = " + 0 + " WHERE username = " + username + " ");){
-			
-			pStatement.executeUpdate();
-			
-		}
-	
-	}
 
 	@Override
 	public void changePassword(String username, String password) throws SQLException {		
@@ -179,8 +153,9 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public void addToFavorite(UserPojo user, Product product) throws SQLException {
-		String sql = "INSERT INTO user_has_favorites (user_id, product_id) VALUES (?,?);";
-		try (PreparedStatement s = connection.prepareStatement(sql);){
+		
+		try (PreparedStatement s = connection.prepareStatement("INSERT INTO user_has_favorites (id_user, id_product) VALUES (?,?)");){
+			
 			s.setInt(1, UserDAO.getInstance().returnId(user));
 			s.setInt(2, ProductDAO.getInstance().returnIdDB(product));
 			s.executeUpdate();
@@ -189,15 +164,21 @@ public class UserDAO implements IUserDAO {
 	}
 	
 	public int returnId(UserPojo user) {
-		String sql = "SELECT user_id FROM users WHERE username = "+user.getUsername()+"";
+		
 		int id = 0;
-		try (PreparedStatement pStatement = connection.prepareStatement(sql);){
-			ResultSet resultSet = pStatement.executeQuery();
-			id = resultSet.getInt("user_id");
+		
+		try (PreparedStatement ps=connection.prepareStatement("SELECT id_user FROM users WHERE username = ?");)
+				{
+			ps.setString(1, user.getUsername());
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			id=rs.getInt("id_user");
 			
-		}catch (SQLException e) {
-			System.out.println(e.getMessage());
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
+		System.out.println(id);
 		return id;
 		
 	}
@@ -214,10 +195,9 @@ public class UserDAO implements IUserDAO {
 	public boolean isAdmin(String username) {
 	
 		// return false;
-		PreparedStatement ps = null;
-		try {
-			ps = connection.prepareStatement("SELECT isAdmin FROM users WHERE username=? ");
-
+		
+		try ( PreparedStatement ps = connection.prepareStatement("SELECT isAdmin FROM users WHERE username=? ");)
+			{
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			rs.next();

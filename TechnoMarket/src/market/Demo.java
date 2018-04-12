@@ -16,6 +16,7 @@ import model.Admin;
 import model.Customer;
 import model.Product;
 import model.Product.TYPES;
+import model.UserPojo;
 
 public class Demo {
 	
@@ -25,8 +26,18 @@ public class Demo {
 		
 		//UserManager.getInstance().register("Pesho3","Gosho2","Peshko14","Pesheca001", "pesho3@abv.bg");
 		Product p=new Product("tvmaika","mnogo qk",200,Product.TYPES.GSM);
-		AdminManager.getInstance().addProduct(p, 20);
+		Product p2=new Product("Samsung","mega moshten",1000,Product.TYPES.TV);
+		Product p3=new Product("Samsung2","mega moshteeen",1000,Product.TYPES.TV);
+		/*try {
+			AdminDAO.getInstance().addProduct(p2, 5);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		//AdminManager.getInstance().addProduct(p3, 20);
+		UserPojo up=new UserPojo("Peshko1","pesho","Peshko1","Pesheca00", "nqma znachenie");
 		
+		UserManager.getInstance().addToFavorites(up, p3);
 		
 		/*try {
 			UserDAO.getInstance().checkUsernameAndPass("Goshko", "Peshko");
