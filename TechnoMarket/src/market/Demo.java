@@ -36,7 +36,9 @@ public class Demo {
 			e.printStackTrace();
 		}*/
 		//AdminManager.getInstance().addProduct(p3, 20);
-		UserPojo up=new UserPojo("Peshko24","pesho","Peshko234","Pesheca00", "nqma znachenie");
+		
+		UserPojo up=new UserPojo("Peshko24","pesho","Peshko14","Pesheca001", "nqma znachenie");
+		UserManager.getInstance().changePassword(up, "Habalqhubalq1");
 		//UserManager.getInstance().register("Peshko", lastName, username, password, email)
 		
 		//UserManager.getInstance().addToFavorites(up, p3);
