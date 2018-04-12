@@ -44,7 +44,7 @@ public class UserManager {
 			
 				if(Validator.validUsername(username) && Validator.validateString(name)&& Validator.validPassword(password) &&
 						Validator.validateString(lastName) && Validator.validEMail(email)) {
-					if(!UserDAO.getInstance().checkUsernameAndPass(username, password)) {
+					if(UserDAO.getInstance().checkUsernameAndPass(username, password)) {
 						
 						UserPojo user=new UserPojo(name,lastName,username,password,email);
 						UserDAO.getInstance().addUser(user);
