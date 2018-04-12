@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import controller.DBManager;
@@ -35,8 +36,16 @@ private static Connection connection;
 	}
 	
 	public int returnIdDB(Product product) {
-		//TODO must fill
-		return 0;
+		String sql = "SELECT id_product FROM products WHERE model = "+product.getModel()+"";
+		int id = 0;
+		try (PreparedStatement pStatement = connection.prepareStatement(sql);){
+			ResultSet resultSet = pStatement.executeQuery();
+			id = resultSet.getInt("id_product");
+			
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return id;
 	}
 	
     

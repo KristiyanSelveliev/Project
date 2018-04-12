@@ -1,4 +1,4 @@
-package dao;
+ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,22 +38,36 @@ public class AdminDAO implements IAdminDAO{
 
 	@Override
 	public void removeProduct(Product product) throws Exception {
-		// TODO Auto-generated method stub
+		try(PreparedStatement ps=connection.prepareStatement("DELETE FROM products WHERE model=? AND description=? ");){
+			ps.setString(1, product.getModel());
+			ps.setString(2, product.getDescription());
+			ps.executeUpdate();
+		}
 		
 	}
 
 	@Override
 	public void updateProductAdmin(Product product) throws Exception {
-		// TODO Auto-generated method stub
+		try(PreparedStatement ps=connection.prepareStatement("UPDATE products SET description=? where model=?");){
+			ps.setString(1, product.getDescription());
+			ps.setString(2, product.getModel());
+			ps.executeUpdate();
+		}
 		
 	}
 
 	@Override
-	public void createProductAdmin(Product product) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void createProductAdmin(Product product,int quantity) throws Exception {
+		 String sql = "INSERT INTO products (model, description, price, type, quantity) VALUES (?,?,?,?,?)";
+		  try (PreparedStatement pStatement = connection.prepareStatement(sql);){
+		   pStatement.setString(1, product.getModel());
+		   pStatement.setString(2, product.getDescription());
+		   pStatement.setDouble(3, product.getPrice());
+		   pStatement.setString(4, product.getType().toString());
+		   pStatement.setInt(5, quantity);
+		   pStatement.executeUpdate();
+		  }
 	}
-	
 	
 	
 	

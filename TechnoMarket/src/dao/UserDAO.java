@@ -1,10 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 import controller.DBManager;
 import model.Product;
@@ -32,16 +35,18 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public void addUser(UserPojo user) throws SQLException  {
 		try (PreparedStatement pStatement = connection.prepareStatement(
-				"INSERT INTO users (name, lastName, username, password, email, loginStatus) VALUES (?,?,?,?,?,?)");){
+				"INSERT INTO users (name, last_name, username, password, email,isAdmin,registrationDate) VALUES (?,?,?,?,?,?,?)");){
 			pStatement.setString(1, user.getName());
 			pStatement.setString(2, user.getLastName());
 			pStatement.setString(3, user.getUsername());
 			pStatement.setString(4, user.getPassword());
 			pStatement.setString(5, user.getEmail());
-			pStatement.setBoolean(6, true);
+			pStatement.setBoolean(6,false);
+			pStatement.setDate(7, Date.valueOf(LocalDate.now()));
 			pStatement.executeUpdate();
 			
 		}
+		
 		
 		
 		
@@ -53,15 +58,20 @@ public class UserDAO implements IUserDAO {
 			pStatement.setString(1, username);
 			pStatement.setString(2, password);
 			try (ResultSet resultSet = pStatement.executeQuery();){
-				if (resultSet.getInt(1) == 1) {
-					return true;
-				
-			    }		
+				int count=0;
+				while (resultSet.next()) {
+					count++;
+			    }	
+				if(count>0) {
+					return false;
+				}
 			
 		     }		
 			
 		}
-		return false;
+		return true;
+				
+			
 	}
 	
 	@Override
@@ -86,29 +96,30 @@ public class UserDAO implements IUserDAO {
 		
 	}
 	
+	public boolean returnLoginStatus(UserPojo user) {
+		String sql = "SELECT login_status FROM users WHERE username = "+user.getUsername()+"";
+		ResultSet result = null;
+		boolean status = false;
 	
-	
-	@Override
-	public boolean login(String username, String password) throws SQLException {
-		if (this.checkUsernameAndPass(username, password)) {
-			try(PreparedStatement pStatement = connection
-					.prepareStatement("UPDATE users SET loginStatus = " + 1 + " WHERE username = " + username + " ");){
-				pStatement.executeUpdate();
-				
-				return true;
-				
-			}
+		try (PreparedStatement pStatement = connection.prepareStatement(sql);){
+			result = pStatement.executeQuery();
+			status = result.getBoolean("login_status");			
 			
-			
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
-		return false;
+		return status;
 
 	}
-
+	
+	
+	
+	
 	@Override
 	public void logout(String username, String password) throws SQLException {
 		try (PreparedStatement pStatement = connection
 				.prepareStatement("UPDATE users SET loginStatus = " + 0 + " WHERE username = " + username + " ");){
+			
 			pStatement.executeUpdate();
 			
 		}
@@ -133,29 +144,23 @@ public class UserDAO implements IUserDAO {
 		// TODO shte se mahne
 
 	}
-
+/*
 	@Override
-	public HashSet<String> searchProduct(String product) throws SQLException {
-		HashSet<String> products = new HashSet<>();
+	public TreeSet<Product> searchProduct(String product) throws SQLException {
+		TreeSet<Product> products = new TreeSet<>((Product p1, Product p2) -> p1.getModel().compareTo(p2.getModel()));
 
 		try (PreparedStatement pStatement = connection
 				.prepareStatement("SELECT model FROM products WHERE model LIKE \'%"+product+"%\'");){
 			try (ResultSet resultSet = pStatement.executeQuery();){
 				while(resultSet.next()) {
 					products.add(resultSet.getString("model"));
-				}
-				
-			}
-			
-		}
-	
+				}				
+			}			
+		}	
 		return products;
-		
-		
-
 	}
 
-	
+	*/
 
 	@Override
 	public void removeProductCustomer(Product product) throws Exception {
@@ -179,7 +184,6 @@ public class UserDAO implements IUserDAO {
 			s.setInt(1, UserDAO.getInstance().returnId(user));
 			s.setInt(2, ProductDAO.getInstance().returnIdDB(product));
 			s.executeUpdate();
-			s.close();			
 		}
 
 	}
@@ -208,9 +212,9 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public boolean isAdmin(String username) {
-		// TODO Auto-generated method stub
+	
 		// return false;
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		try {
 			ps = connection.prepareStatement("SELECT isAdmin FROM users WHERE username=? ");
 
@@ -223,7 +227,6 @@ public class UserDAO implements IUserDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
